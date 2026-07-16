@@ -8,6 +8,10 @@ const methodOverride = require("method-override");
 const {MongoStore} = require("connect-mongo");
 const connectToDB = require("./db.js");
 
+const dns = require("dns");
+const console = require("console");
+dns.setServers(["8.8.8.8", "1.1.1.1"]);
+
 
 // import middleware
 const isSignedIn = require("./middleware/is-signed-in.js");

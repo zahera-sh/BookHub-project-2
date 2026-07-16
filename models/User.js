@@ -8,15 +8,23 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    trim: true
+    trim: true,
+    match: [/^[a-zA-Z0-9]{3,16}$/, 'Username must be alphanumeric and 3-16 characters long'],
   },
 
   password: {
     type: String,
     required: true,
+    minLength: 8,
   },
 
-}, {timestamps: true});
+  gender: {
+    type: String,
+    enum: ["F", "M"],
+    required: true,
+  },
+
+}, { timestamps: true });
 
 
 
