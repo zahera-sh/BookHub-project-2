@@ -11,11 +11,10 @@ const bookSchema = new mongoose.Schema({
         trim: true,
     },
 
-    author: {
-        type: String,
-        required: true,
-        trim: true,
-    },
+    authors: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Author",
+    }],
 
     publishedDate: {
         type: Date,
@@ -30,14 +29,20 @@ const bookSchema = new mongoose.Schema({
         maxLength: 500,
     },
 
-    genre: {
+    genres: [{
         type: String,
         required: true,
-    },
+        default: [],
+    }],
 
     pageCount: {
         type: Number,
         min: 1,
+    },
+
+    coverPhoto: {
+        type: String,
+        default: "/images/default-cover.jpg",
     },
 
     likes: [{
