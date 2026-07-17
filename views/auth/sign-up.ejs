@@ -2,9 +2,9 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BookHub Registration</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BookHub | Registration</title>
   <link rel="icon" href="/images/BookHub-logo-mini.png" type="image/png">
   <link rel="stylesheet" href="/css/style-for-all.css">
 </head>
@@ -17,22 +17,21 @@
 
     <form action="/auth/sign-up" method="post">
       <label for="username">Username</label>
-      <input type="text" name="username" id="username" minlength="3" maxlength="12" pattern="[A-Za-z0-9]{3,12}"
-        required />
+      <input type="text" name="username" id="username" minlength="3" maxlength="12" pattern="[A-Za-z0-9]{3,12}" required/>
 
       <div class="alert-banner">
         <span>🛈 Username must be alphanumeric and 3-12 characters long.</span>
       </div>
 
       <label for="password">Password</label>
-      <input type="password" name="password" id="password" minlength="8" required />
+      <input type="password" name="password" id="password" minlength="8" required/>
 
       <div class="alert-banner">
         <span>🛈 Passwords must be at least 8 characters.</span>
       </div>
 
       <label for="confirmPassword">Confirm Password</label>
-      <input type="password" name="confirmPassword" id="confirmPassword" required />
+      <input type="password" name="confirmPassword" id="confirmPassword" required/>
 
       <br>
 

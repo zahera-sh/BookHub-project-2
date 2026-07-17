@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
     trim: true,
-    match: [/^[a-zA-Z0-9]{3,12}$/, 'Username must be alphanumeric and 3-16 characters long'],
+    match: [/^[a-zA-Z0-9]{3,12}$/, "Username must be alphanumeric and 3-16 characters long"],
   },
 
   password: {

@@ -20,6 +20,7 @@ const passUserToView = require("./middleware/pass-user-to-view.js");
 
 // import controller
 const authController = require("./controllers/auth.controllers.js");
+const userController = require("./controllers/user.controllers.js");
 const indexController = require("./controllers/index.controllers.js");
 
 
@@ -53,6 +54,7 @@ app.use(passUserToView);
 
 // routes
 app.use("/auth", authController);
+app.use("/dashboard", userController);
 app.use("/", indexController);
 
 

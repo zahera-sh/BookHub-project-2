@@ -90,7 +90,7 @@ router.post("/sign-in", async (req, res) => {
     _id: userInDatabase._id
   };
 
-  res.redirect("/");
+  res.redirect("/dashboard");
 });
 
 

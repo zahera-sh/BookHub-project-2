@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="icon" href="/images/BookHub-logo-mini.png" type="image/png">
+    <link rel="stylesheet" href="/css/style-for-all.css">
+</head>
+
+<body>
+
+    <%- include("../partials/navbar") %>
+
+        <h1>Dashboard</h1>
+
+        <p>Welcome <%= user.username %></p>
+
+        <img src="<%=user.profilePhoto%>" alt="profile-photo" style="width: 100px; height: 100px;">
+
+        <p>Liked Books: </p>
+        <p>Reviews: </p>
+        <p>Followed Authors: </p>
+
+        <h2>My Library</h2>
+        
+        <p>Danger Zone:</p>
+
+        <form action="/dashboard/change-password" method="POST">
+            <label for="password">New Password</label>
+            <input type="password" name="password" id="password" minlength="8" required/>
+
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" name="confirmPassword" id="confirmPassword" required/>
+
+            <button type="submit">Confirm</button>
+        </form>
+
+        <p>Danger Zone Danger Zone Danger Zone Danger Zone:</p>
+
+        <form action="/dashboard?_method=DELETE" method="POST">
+            <button>Delete Account</button>
+        </form>
+
+</body>
+
+</html>
