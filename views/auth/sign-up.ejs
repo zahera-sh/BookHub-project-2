@@ -11,16 +11,40 @@
 
   <%- include("../partials/navbar") %>
 
-    <h1>Create a new account!</h1>
+    <h1>Create New Account</h1>
 
     <form action="/auth/sign-up" method="post">
-      <label for="username">Username:</label>
-      <input type="text" name="username" id="username" />
-      <label for="password">Password:</label>
-      <input type="password" name="password" id="password" />
-      <label for="confirmPassword">Confirm Password:</label>
-      <input type="password" name="confirmPassword" id="confirmPassword" />
-      <button type="submit">Sign up</button>
+      <label for="username">Username</label>
+      <input type="text" name="username" id="username" minlength="3" maxlength="12" pattern="[A-Za-z0-9]{3,12}"
+        required />
+
+      <div class="alert-banner">
+        <span>🛈 Username must be alphanumeric and 3-12 characters long.</span>
+      </div>
+
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" minlength="8" required />
+
+      <div class="alert-banner">
+        <span>🛈 Passwords must be at least 8 characters.</span>
+      </div>
+
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" name="confirmPassword" id="confirmPassword" required />
+
+      <br>
+
+      <label for="gender">Gender</label>
+      <input type="radio" name="gender" id="female" value="F">
+      <label for="female"><img src="" alt="female"></label>
+      <input type="radio" name="gender" id="male" value="M">
+      <label for="male"><img src="" alt="Male"></label>
+
+      <button type="submit">Create</button>
+
+      <p>By creating an account, you agree to the BookHub <a href="">Terms of Service</a> and <a href="">Privacy Policy</a></p>
+
+      <p>Already have an account? <a href="/auth/sign-in">Sign in</a></p>
     </form>
 
 </body>
