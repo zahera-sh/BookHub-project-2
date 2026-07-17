@@ -12,22 +12,48 @@ router.get("/sign-up", (req, res) => {
 
 
 router.post("/sign-up", async (req, res) => {
-  const userInDatabase = await User.findOne({ username: req.body.username });
-  if (userInDatabase) {
-    return res.send("Username already taken.");
+
+  try {
+
+    const userInDatabase = await User.findOne({ username: req.body.username });
+    if (userInDatabase) {
+      return res.send("Username already taken.");
+    }
+
+    if (req.body.password !== req.body.confirmPassword) {
+      return res.send("Passwords must match.");
+    }
+
+    const hashedPassword = bcrypt.hashSync(req.body.password, 10);
+    req.body.password = hashedPassword;
+
+    // profilePhoto to be stored in DB if needed for future??
+    const profilePhoto =
+      // if else shortcut because only two options M & F
+      req.body.gender === "M"
+        // if true ?
+        ? "/images/profile-photo-male.png"
+        // if false :
+        : "/images/profile-photo-female.png";
+
+    // validation logic
+    const user = await User.create({
+      username: req.body.username,
+      password: hashedPassword,
+      gender: req.body.gender,
+      profilePhoto,
+    });
+
+    res.redirect("/auth/sign-in");
+
   }
 
-  if (req.body.password !== req.body.confirmPassword) {
-    return res.send("Passwords must match.");
+  catch (err) {
+
+    res.send(err.message);
+    
   }
 
-  const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-  req.body.password = hashedPassword;
-
-
-  // validation logic
-  const user = await User.create(req.body);
-  res.redirect("/auth/sign-in");
 });
 
 
@@ -39,7 +65,7 @@ router.get("/sign-in", (req, res) => {
 
 
 router.post("/sign-in", async (req, res) => {
-  
+
   // get the user from the database
   const userInDatabase = await User.findOne({ username: req.body.username });
   if (!userInDatabase) {

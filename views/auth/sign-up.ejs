@@ -4,7 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sign Up</title>
+  <title>BookHub Registration</title>
+  <link rel="icon" href="/images/BookHub-logo-mini.png" type="image/png">
+  <link rel="stylesheet" href="/css/style-for-all.css">
 </head>
 
 <body>
@@ -35,10 +37,12 @@
       <br>
 
       <label for="gender">Gender</label>
-      <input type="radio" name="gender" id="female" value="F">
-      <label for="female"><img src="" alt="female"></label>
+
+      <input type="radio" name="gender" id="female" value="F" required>
+      <label for="female"><img src="/images/profile-photo-female.png" alt="female" style="width: 100px; height: 100px;"></label>
+      
       <input type="radio" name="gender" id="male" value="M">
-      <label for="male"><img src="" alt="Male"></label>
+      <label for="male"><img src="/images/profile-photo-male.png" alt="Male" style="width: 100px; height: 100px;"></label>
 
       <button type="submit">Create</button>
 
