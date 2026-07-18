@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const isSignedIn = require("../middleware/is-signed-in");
-const User = require("../models/user.js");
 const bcrypt = require("bcrypt");
+const User = require("../models/user.js");
 
 
 
@@ -10,7 +10,8 @@ router.get("/", isSignedIn, async (req, res) => {
     res.render("user/dashboard.ejs", {user});
 });
 
-router.post("/change-password", async (req, res) => {
+
+router.post("/change-password", isSignedIn, async (req, res) => {
 
     if (req.body.password !== req.body.confirmPassword) {
       return res.send("Passwords must match.");
@@ -26,7 +27,8 @@ router.post("/change-password", async (req, res) => {
 
 });
 
-router.delete("/", async (req, res) => {
+
+router.delete("/", isSignedIn, async (req, res) => {
     await User.findByIdAndDelete(req.session.user._id);
     req.session.destroy();
     res.redirect("/");

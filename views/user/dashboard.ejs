@@ -15,7 +15,8 @@
 
         <h1>Dashboard</h1>
 
-        <p>Welcome <%= user.username %></p>
+        <p>Welcome <%= user.username %>
+        </p>
 
         <img src="<%=user.profilePhoto%>" alt="profile-photo" style="width: 100px; height: 100px;">
 
@@ -23,22 +24,26 @@
         <p>Reviews: </p>
         <p>Followed Authors: </p>
 
-        <h2>My Library</h2>
-        
+        <a href="">My Library</a>
+
+        <p>Contributions</p>
+        <p>Books: </p>
+        <p>Authors: </p>
+
         <p>Danger Zone:</p>
 
         <form action="/dashboard/change-password" method="POST">
             <label for="password">New Password</label>
-            <input type="password" name="password" id="password" minlength="8" required/>
+            <input type="password" name="password" id="password" minlength="8" required />
 
             <label for="confirmPassword">Confirm Password</label>
-            <input type="password" name="confirmPassword" id="confirmPassword" required/>
+            <input type="password" name="confirmPassword" id="confirmPassword" required />
 
             <button type="submit">Confirm</button>
         </form>
 
         <p>Danger Zone Danger Zone Danger Zone Danger Zone:</p>
-
+        <!-- need Omar assistant to have a verifying step -->
         <form action="/dashboard?_method=DELETE" method="POST">
             <button>Delete Account</button>
         </form>

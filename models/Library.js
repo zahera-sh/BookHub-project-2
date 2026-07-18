@@ -41,6 +41,15 @@ const librarySchema = new mongoose.Schema({
         trim: true,
     },
 
+    isFavorited: {
+        type: Boolean,
+        default: true,
+    },
+
+    isFinished: {
+        type: Boolean,
+    },
+
 }, { timestamps: true });
 
 

@@ -3,6 +3,8 @@
 ## Description
 BookHub is readers' source for *discovering*, *organizing*, and *sharing* books. Users can browse books, build a personal library, track their reading progress, write reviews, rate books, and connect with a community of readers in one place 🤩💫
 
+## Getting started
+
 ## Features
 
 ## Screenshots
@@ -34,6 +36,8 @@ BookHub is readers' source for *discovering*, *organizing*, and *sharing* books.
 ## Routes
 
 ## Future Enhancements
+
+## Attributions
 
 ## Credits
 
