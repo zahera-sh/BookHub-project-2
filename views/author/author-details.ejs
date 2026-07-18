@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        BookHub | <%= author.authorName %>
+    </title>
+    <link rel="icon" href="/images/BookHub-logo-mini.png" type="image/png">
+    <link rel="stylesheet" href="/css/style-for-all.css">
+</head>
+
+<body>
+
+    <%- include("../partials/navbar") %>
+
+        <h1>
+            <%= author.authorName %>
+        </h1>
+        <img src="<%=author.profilePhoto%>" alt="profilePhoto">
+        <p>
+            Birth Date: <%= author.birthDate %>
+                Death Date: <%= author.deathDate %>
+                    Nationality: <%= author.nationality %>
+                        Books By Author: <%= author.booksByAuthor %>
+                            Followers: <%= author.followers %>
+        </p>
+
+</body>
+
+</html>

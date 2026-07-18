@@ -16,7 +16,7 @@
         <h1>The Little Valley</h1>
 
         <% for(let oneBook of books){ %>
-            <img src="<%=oneBook.coverPhoto%>" alt="default-cover">
+            <img src="<%=oneBook.coverPhoto%>" alt="coverPhoto">
             <a href="/valley/<%=oneBook._id%>"><%= oneBook.title %></a>
         
         <% } %>
