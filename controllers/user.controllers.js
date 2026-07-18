@@ -7,23 +7,32 @@ const User = require("../models/user.js");
 
 router.get("/", isSignedIn, async (req, res) => {
     const user = await User.findById(req.session.user._id);
-    res.render("user/dashboard.ejs", {user});
+    res.render("user/dashboard.ejs", { user });
 });
 
 
 router.post("/change-password", isSignedIn, async (req, res) => {
 
-    if (req.body.password !== req.body.confirmPassword) {
-      return res.send("Passwords must match.");
+    try {
+
+        if (req.body.password !== req.body.confirmPassword) {
+            return res.send("Passwords must match.");
+        }
+
+        const hashedPassword = bcrypt.hashSync(req.body.password, 10);
+        req.body.password = hashedPassword;
+
+        const user = await User.findByIdAndUpdate
+            (req.session.user._id, { password: hashedPassword, });
+
+        res.redirect("/dashboard");
     }
 
-    const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-    req.body.password = hashedPassword;
+    catch (err) {
 
-    const user = await User.findByIdAndUpdate
-    (req.session.user._id, {password: hashedPassword,});
+        res.send(err.message);
 
-    res.redirect("/dashboard");
+    }
 
 });
 
