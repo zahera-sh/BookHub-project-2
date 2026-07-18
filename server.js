@@ -23,6 +23,7 @@ const authController = require("./controllers/auth.controllers.js");
 const userController = require("./controllers/user.controllers.js");
 const indexController = require("./controllers/index.controllers.js");
 const bookController = require("./controllers/book.controllers.js");
+const authorController = require("./controllers/author.controllers.js");
 
 
 
@@ -57,6 +58,7 @@ app.use(passUserToView);
 app.use("/auth", authController);
 app.use("/dashboard", userController);
 app.use("/valley", bookController);
+app.use("/authors", authorController);
 app.use("/", indexController);
 
 

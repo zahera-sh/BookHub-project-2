@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BookHub | The Valley</title>
+    <title>BookHub | Authors</title>
     <link rel="icon" href="/images/BookHub-logo-mini.png" type="image/png">
     <link rel="stylesheet" href="/css/style-for-all.css">
 </head>
@@ -13,11 +13,11 @@
 
     <%- include("../partials/navbar") %>
 
-        <h1>The Little Valley</h1>
+        <h1>Find your favourite Authors</h1>
 
-        <% for(let oneBook of books){ %>
-            <img src="<%=oneBook.coverPhoto%>" alt="default-cover">
-            <a href="/valley/<%=oneBook._id%>"><%= oneBook.title %></a>
+        <% for(let oneAuthor of authors){ %>
+            <img src="<%=oneAuthor.profilePhoto%>" alt="default-photo">
+            <a href="/authors/<%=oneAuthor._id%>"><%= oneAuthor.authorName %></a>
         
         <% } %>
 
