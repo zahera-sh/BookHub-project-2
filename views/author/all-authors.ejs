@@ -16,7 +16,7 @@
         <h1>Find your favourite Authors</h1>
 
         <% for(let oneAuthor of authors){ %>
-            <img src="<%=oneAuthor.profilePhoto%>" alt="profilePhoto">
+            <img src="<%=oneAuthor.profilePhoto%>" alt="profilePhoto" style="width: 90px; height: 120px; object-fit: cover;">
             <a href="/authors/<%=oneAuthor._id%>"><%= oneAuthor.authorName %></a>
         
         <% } %>
