@@ -2,13 +2,11 @@ const router = require("express").Router();
 const isSignedIn = require("../middleware/is-signed-in.js");
 const Author = require("../models/author.js");
 const multer = require("multer")
+const path = require("path");
 const storage = multer.diskStorage({
-    destination: "../images",
+    destination: "public/images",
     filename: (req, file, cb) => {
-        return cb(
-            null,
-            `${file.fieldname}_${Date.now()}`
-        );
+        return cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`);
     },
 });
 const upload = multer({ storage: storage });

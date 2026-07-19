@@ -20,7 +20,7 @@ const authorSchema = new mongoose.Schema({
 
     profilePhoto: {
         type: String,
-        default: "/images/default-photo.jpg",
+        default: "/default-photo.jpg",
     },
 
     birthDate: {
