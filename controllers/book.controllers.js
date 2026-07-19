@@ -1,8 +1,18 @@
 const router = require("express").Router();
 const isSignedIn = require("../middleware/is-signed-in");
+const multer = require("multer")
+const path = require("path");
+const storage = multer.diskStorage({
+    destination: "public/images",
+    filename: (req, file, cb) => {
+        return cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`);
+    },
+});
+const upload = multer({ storage: storage });
 const User = require("../models/user.js");
 const Book = require("../models/book.js");
 const Author = require("../models/author.js");
+const Genre = require("../models/genre.js");
 
 
 
@@ -16,15 +26,19 @@ router.get("/new", isSignedIn, async (req, res) => {
     try {
 
         const authorsList = await Author.find();
-        res.render("book/new-book.ejs", { authorsList });
+        const genresList = await Genre.find();
+        res.render("book/new-book.ejs", {
+            authorsList,
+            genresList,
+        });
     }
-    
+
     catch (err) {
         console.log("Error:", err);
     }
 });
 
-router.post("/", isSignedIn, async (req, res) => {
+router.post("/", isSignedIn, upload.single("coverPhoto"), async (req, res) => {
 
     try {
 
@@ -34,8 +48,9 @@ router.post("/", isSignedIn, async (req, res) => {
         }
 
         else {
-            const coverPhoto =
-                req.body.coverPhoto || undefined;
+            const coverPhoto = req.file
+                ? req.file.filename
+                : undefined;
 
             const createdBook = await Book.create({
                 title: req.body.title,
@@ -45,7 +60,6 @@ router.post("/", isSignedIn, async (req, res) => {
                 genres: req.body.genres,
                 pageCount: req.body.pageCount,
                 coverPhoto,
-                likes,
             })
 
             console.log(createdBook._id)
@@ -60,7 +74,7 @@ router.post("/", isSignedIn, async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     console.log(req.params.id)
-    const foundBook = await Book.findById(req.params.id)
+    const foundBook = await Book.findById(req.params.id).populate('genres authors')
     res.render("book/book-details.ejs", { book: foundBook })
 });
 

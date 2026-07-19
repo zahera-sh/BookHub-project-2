@@ -15,15 +15,19 @@
 
     <%- include("../partials/navbar") %>
 
-        <h1>
-            <%= book.title %>
-        </h1>
-        <img src="<%=book.coverPhoto%>" alt="coverPhoto">
+        <h1><%= book.title %></h1>
+
+        <img src="/images/<%=book.coverPhoto%>" alt="coverPhoto" style="width: 90px; height: 120px; object-fit: cover;">
+        
         <p>
-            Authors: <%= book.authors %>
+            Authors: <% for (let author of book.authors) { %>
+                        <%= author.authorName %>, 
+                    <% } %>
                 Published: <%= book.publishedDate %>
                     Description: <%= book.description %>
-                        Genres: <%= book.genres %>
+                        Genres: <% for (let genre of book.genres) { %>
+                                    <%= genre.genre %>,
+                                <% } %>
                             Page Count: <%= book.pageCount %>
                                 Likes: <%= book.likes.length %>
         </p>

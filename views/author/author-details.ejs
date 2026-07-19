@@ -15,17 +15,17 @@
 
     <%- include("../partials/navbar") %>
 
-        <h1>
-            <%= author.authorName %>
-        </h1>
-        <img src="/images/<%=author.profilePhoto%>" alt="profilePhoto"  style="width: 90px; height: 120px; object-fit: cover;">
+        <h1><%= author.authorName %></h1>
+
+        <img src="/images/<%=author.profilePhoto%>" alt="profilePhoto" style="width: 90px; height: 120px; object-fit: cover;">
+        
         <p>
-            Birth Date: <%= author.birthDate %> 
-            <!-- what is thiiiiiss???? -->
-                Death Date: <%= author.deathDate %>
-                    Nationality: <%= author.nationality %>
-                        Books By Author: <%= author.booksByAuthor %>
-                            Followers: <%= author.followers %>
+            Full Name: <%= author.fullName %>
+                Birth Date: <%= author.birthDate %>
+                    Death Date: <%= author.deathDate %>
+                        Nationality: <%= author.nationality %>
+                            Books By Author: <%= author.booksByAuthor %>
+                                Followers: <%= author.followers %>
         </p>
 
 </body>

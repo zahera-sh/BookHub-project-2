@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const isSignedIn = require("../middleware/is-signed-in.js");
-const Author = require("../models/author.js");
 const multer = require("multer")
 const path = require("path");
 const storage = multer.diskStorage({
@@ -10,6 +9,7 @@ const storage = multer.diskStorage({
     },
 });
 const upload = multer({ storage: storage });
+const Author = require("../models/author.js");
 
 
 
@@ -37,7 +37,7 @@ router.post("/", isSignedIn, upload.single("profilePhoto"), async (req, res) => 
 
             const createdAuthor = await Author.create({
                 authorName: req.body.authorName,
-                penName: req.body.penName,
+                fullName: req.body.fullName,
                 profilePhoto,
                 birthDate: req.body.birthDate,
                 deathDate: req.body.deathDate,

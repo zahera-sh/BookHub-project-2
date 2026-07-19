@@ -12,10 +12,9 @@ const authorSchema = new mongoose.Schema({
         unique: true,
     },
 
-    penName: {
+    fullName: {
         type: String,
         trim: true,
-        minLength: 3,
     },
 
     profilePhoto: {

@@ -41,7 +41,7 @@ const bookSchema = new mongoose.Schema({
 
     coverPhoto: {
         type: String,
-        default: "/images/default-cover.jpg",
+        default: "/default-cover.jpg",
     },
 
     likes: [{
