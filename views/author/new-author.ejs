@@ -15,13 +15,16 @@
 
         <h1>Contribute by adding a new Author</h1>
 
-        <form action="/authors" method="post">
+        <form action="/authors" method="post" enctype="multipart/form-data">
 
             <label for="authorName">Author Name:</label>
             <input type="text" name="authorName" id="authorName" minlength="3" required>
 
+            <label for="penName">Pen Name:</label>
+            <input type="text" name="penName" id="penName" minlength="3">
+
             <label for="profilePhoto">Add Photo URL</label>
-            <input type="text" name="profilePhoto" id="profilePhoto">
+            <input type="file" name="profilePhoto" id="profilePhoto">
 
             <label for="birthDate">Birth Date:</label>
             <input type="date" name="birthDate" id="birthDate">

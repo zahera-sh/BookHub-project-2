@@ -12,6 +12,12 @@ const authorSchema = new mongoose.Schema({
         unique: true,
     },
 
+    penName: {
+        type: String,
+        trim: true,
+        minLength: 3,
+    },
+
     profilePhoto: {
         type: String,
         default: "/images/default-photo.jpg",

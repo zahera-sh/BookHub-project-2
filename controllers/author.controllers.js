@@ -1,6 +1,17 @@
 const router = require("express").Router();
 const isSignedIn = require("../middleware/is-signed-in.js");
 const Author = require("../models/author.js");
+const multer = require("multer")
+const storage = multer.diskStorage({
+    destination: "../images",
+    filename: (req, file, cb) => {
+        return cb(
+            null,
+            `${file.fieldname}_${Date.now()}`
+        );
+    },
+});
+const upload = multer({ storage: storage });
 
 
 
@@ -13,7 +24,7 @@ router.get("/new", isSignedIn, (req, res) => {
     res.render("author/new-author.ejs")
 });
 
-router.post("/", isSignedIn, async (req, res) => {
+router.post("/", isSignedIn, upload.single("profilePhoto"), async (req, res) => {
     try {
 
         const authorInDatabase = await Author.findOne({ authorName: req.body.authorName });
@@ -22,11 +33,13 @@ router.post("/", isSignedIn, async (req, res) => {
         }
 
         else {
-            const profilePhoto =
-                req.body.profilePhoto || undefined;
+            const profilePhoto = req.file
+                ? req.file.filename
+                : undefined;
 
             const createdAuthor = await Author.create({
                 authorName: req.body.authorName,
+                penName: req.body.penName,
                 profilePhoto,
                 birthDate: req.body.birthDate,
                 deathDate: req.body.deathDate,
