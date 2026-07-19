@@ -36,11 +36,17 @@ router.post("/change-password", isSignedIn, async (req, res) => {
 
 });
 
+router.put("/updateIsDeleted/:id", isSignedIn, async (req, res) => {
+    await User.findByIdAndUpdate(req.session.user._id, { isDeleted: true });
+        req.session.destroy();
 
-router.delete("/", isSignedIn, async (req, res) => {
-    await User.findByIdAndDelete(req.session.user._id);
-    req.session.destroy();
     res.redirect("/");
+});
+
+router.get("/:id/confirm-delete", isSignedIn, async (req, res) => {
+    console.log(req.params.id)
+    const foundUser = await User.findById(req.params.id)
+    res.render("user/delete-user.ejs")
 });
 
 

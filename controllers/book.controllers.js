@@ -2,6 +2,7 @@ const router = require("express").Router();
 const isSignedIn = require("../middleware/is-signed-in");
 const User = require("../models/user.js");
 const Book = require("../models/book.js");
+const Author = require("../models/author.js");
 
 
 
@@ -10,8 +11,17 @@ router.get("/", async (req, res) => {
     res.render("book/all-books.ejs", { books: allBooks });
 });
 
-router.get("/new", isSignedIn, (req, res) => {
-    res.render("book/new-book.ejs")
+router.get("/new", isSignedIn, async (req, res) => {
+
+    try {
+
+        const authorsList = await Author.find();
+        res.render("book/new-book.ejs", { authorsList });
+    }
+    
+    catch (err) {
+        console.log("Error:", err);
+    }
 });
 
 router.post("/", isSignedIn, async (req, res) => {
@@ -46,7 +56,7 @@ router.post("/", isSignedIn, async (req, res) => {
     catch (err) {
         console.log("Error", err)
     }
-})
+});
 
 router.get("/:id", async (req, res) => {
     console.log(req.params.id)

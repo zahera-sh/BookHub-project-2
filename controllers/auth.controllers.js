@@ -10,7 +10,6 @@ router.get("/sign-up", (req, res) => {
   res.render("auth/sign-up.ejs");
 });
 
-
 router.post("/sign-up", async (req, res) => {
 
   try {
@@ -63,12 +62,11 @@ router.get("/sign-in", (req, res) => {
   res.render("auth/sign-in.ejs");
 });
 
-
 router.post("/sign-in", async (req, res) => {
 
   // get the user from the database
   const userInDatabase = await User.findOne({ username: req.body.username });
-  if (!userInDatabase) {
+  if (!userInDatabase || userInDatabase.isDeleted) {
     return res.send("Login failed. Please try again.");
   }
 
@@ -92,7 +90,6 @@ router.post("/sign-in", async (req, res) => {
 
   res.redirect("/dashboard");
 });
-
 
 router.get("/sign-out", (req, res) => {
   req.session.destroy();

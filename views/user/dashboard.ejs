@@ -43,8 +43,8 @@
         </form>
 
         <p>Danger Zone Danger Zone Danger Zone Danger Zone:</p>
-        <!-- need Omar assistant to have a verifying step -->
-        <form action="/dashboard?_method=DELETE" method="POST">
+
+        <form action="/dashboard/<%=user._id%>/confirm-delete" method="GET">
             <button>Delete Account</button>
         </form>
 
