@@ -36,7 +36,7 @@
 
 
 
-        <% if(author.followers.some((oneId)=> oneId.equals(user._id))) {%>
+        <% if(author.followers.some((oneId) => oneId.equals(user._id))) { %>
             <form action="/authors/<%= author._id %>/unfollow" method="post">
                 <button>Unfollow</button>
             </form>

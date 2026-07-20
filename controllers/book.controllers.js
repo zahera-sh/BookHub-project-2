@@ -78,6 +78,21 @@ router.get("/:id", async (req, res) => {
     res.render("book/book-details.ejs", { book: foundBook })
 });
 
+router.post("/like/:id", isSignedIn, async (req, res) => {
+    const foundBook = await Book.findById(req.params.id)
+    foundBook.likes.push(req.session.user._id)
+    foundBook.save()
+    res.redirect(`/valley/${foundBook._id}`)
+});
+
+router.post("/:id/dislike", isSignedIn, async (req, res) => {
+    const foundBook = await Book.findById(req.params.id)
+    const allIdsButMyId = foundBook.likes.filter((oneId) => !oneId.equals(req.session.user._id))
+    foundBook.likes = allIdsButMyId
+    foundBook.save()
+    res.redirect("/valley/" + foundBook._id)
+});
+
 
 
 module.exports = router;

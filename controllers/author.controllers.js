@@ -70,10 +70,10 @@ router.post("/follow/:id", isSignedIn, async (req, res) => {
 
 router.post("/:id/unfollow", isSignedIn, async (req, res) => {
     const foundAuthor = await Author.findById(req.params.id)
-    const allIdsButMyId = foundAuthor.followers.filter((oneId)=>!oneId.equals(req.session.user._id))
+    const allIdsButMyId = foundAuthor.followers.filter((oneId) => !oneId.equals(req.session.user._id))
     foundAuthor.followers = allIdsButMyId
     foundAuthor.save()
-    res.redirect('/authors/' + foundAuthor._id )
+    res.redirect("/authors/" + foundAuthor._id)
 });
 
 

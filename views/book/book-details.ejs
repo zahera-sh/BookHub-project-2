@@ -36,6 +36,17 @@
         
         <p>Likes: <%= book.likes.length %></p>
 
+
+        <% if(book.likes.some((oneId) => oneId.equals(user._id))) { %>
+            <form action="/valley/<%= book._id %>/dislike" method="post">
+            <button>🩷</button>
+            </form>
+        <% } else { %>
+            <form action="/valley/like/<%= book._id %>" method="post">
+            <button>🩶</button>
+            </form>
+        <% } %>
+
 </body>
 
 </html>
