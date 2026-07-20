@@ -61,6 +61,21 @@ router.get("/:id", async (req, res) => {
     res.render("author/author-details.ejs", { author: foundAuthor })
 });
 
+router.post("/follow/:id", isSignedIn, async (req, res) => {
+    const foundAuthor = await Author.findById(req.params.id)
+    foundAuthor.followers.push(req.session.user._id)
+    foundAuthor.save()
+    res.redirect(`/authors/${foundAuthor._id}`)
+});
+
+router.post("/:id/unfollow", isSignedIn, async (req, res) => {
+    const foundAuthor = await Author.findById(req.params.id)
+    const allIdsButMyId = foundAuthor.followers.filter((oneId)=>!oneId.equals(req.session.user._id))
+    foundAuthor.followers = allIdsButMyId
+    foundAuthor.save()
+    res.redirect('/authors/' + foundAuthor._id )
+});
+
 
 
 module.exports = router;

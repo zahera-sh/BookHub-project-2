@@ -2,14 +2,16 @@ const router = require("express").Router();
 const isSignedIn = require("../middleware/is-signed-in");
 const bcrypt = require("bcrypt");
 const User = require("../models/user.js");
+const Author = require("../models/author.js");
 
 
 
 router.get("/", isSignedIn, async (req, res) => {
     const user = await User.findById(req.session.user._id);
-    res.render("user/dashboard.ejs", { user });
-});
+    const following = await Author.find({ followers: req.session.user._id })
 
+    res.render("user/dashboard.ejs", { user, following });
+});
 
 router.post("/change-password", isSignedIn, async (req, res) => {
 
@@ -38,7 +40,7 @@ router.post("/change-password", isSignedIn, async (req, res) => {
 
 router.put("/updateIsDeleted/:id", isSignedIn, async (req, res) => {
     await User.findByIdAndUpdate(req.session.user._id, { isDeleted: true });
-        req.session.destroy();
+    req.session.destroy();
 
     res.redirect("/");
 });

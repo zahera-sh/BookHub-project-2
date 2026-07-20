@@ -18,15 +18,33 @@
         <h1><%= author.authorName %></h1>
 
         <img src="/images/<%=author.profilePhoto%>" alt="profilePhoto" style="width: 90px; height: 120px; object-fit: cover;">
+
+
+        <p>Full Name: <%= author.fullName %></p>
+
+        <p>Birth Date: <%= author.birthDate? author.birthDate.toLocaleDateString("en-GB")
+        : "Unknown" %></p>
         
-        <p>
-            Full Name: <%= author.fullName %>
-                Birth Date: <%= author.birthDate %>
-                    Death Date: <%= author.deathDate %>
-                        Nationality: <%= author.nationality %>
-                            Books By Author: <%= author.booksByAuthor %>
-                                Followers: <%= author.followers %>
-        </p>
+        <p>Death Date: <%= author.deathDate? author.deathDate.toLocaleDateString("en-GB")
+        : "Still Alive"%></p>
+        
+        <p>Nationality: <%= author.nationality %></p>
+        
+        <p>Books By Author: <%= author.booksByAuthor %></p>
+        
+        <p>Followers: <%= author.followers.length %></p>
+
+
+
+        <% if(author.followers.some((oneId)=> oneId.equals(user._id))) {%>
+            <form action="/authors/<%= author._id %>/unfollow" method="post">
+                <button>Unfollow</button>
+            </form>
+        <% } else { %>
+            <form action="/authors/follow/<%= author._id %>" method="post">
+                <button>Follow</button>
+            </form>
+        <% } %>
 
 </body>
 

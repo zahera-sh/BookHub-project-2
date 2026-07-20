@@ -22,8 +22,10 @@
 
         <p>Liked Books: </p>
         <p>Reviews: </p>
-        <p>Followed Authors: </p>
-
+        <p>Following:</p>
+<% for(let onefollow of following){ %>
+    <p><%=onefollow.authorName%></p>
+    <% } %>
         <a href="">My Library</a>
 
         <p>Contributions</p>
