@@ -7,7 +7,7 @@
     <title>
         BookHub | <%= book.title %>
     </title>
-    <link rel="icon" href="/images/BookHub-logo-mini.png" type="image/png">
+    <link rel="icon" href="/images/main/BookHub-logo-mini.png" type="image/png">
     <link rel="stylesheet" href="/css/style-for-all.css">
 </head>
 
@@ -17,7 +17,7 @@
 
         <h1><%= book.title %></h1>
 
-        <img src="/images/<%=book.coverPhoto%>" alt="coverPhoto" style="width: 90px; height: 120px; object-fit: cover;">
+        <img src="/images/books/<%=book.coverPhoto%>" alt="coverPhoto" style="width: 90px; height: 120px; object-fit: cover;">
         
         <p>Authors:</p>
             <% for (let author of book.authors) { %>

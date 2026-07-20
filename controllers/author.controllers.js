@@ -3,7 +3,7 @@ const isSignedIn = require("../middleware/is-signed-in.js");
 const multer = require("multer")
 const path = require("path");
 const storage = multer.diskStorage({
-    destination: "public/images",
+    destination: "public/images/authors",
     filename: (req, file, cb) => {
         return cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`);
     },

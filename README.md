@@ -31,7 +31,7 @@ BookHub is readers' source for *discovering*, *organizing*, and *sharing* books.
 5. MongoDB
 
 ## Database Design
-![BookHub-ERD ✨](public/images/BookHub-ERD.jpg)
+![BookHub-ERD ✨](public/images/main/BookHub-ERD.jpg)
 
 ## Routes
 

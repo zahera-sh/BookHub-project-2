@@ -31,9 +31,9 @@ router.post("/sign-up", async (req, res) => {
       // if else shortcut because only two options M & F
       req.body.gender === "M"
         // if true ?
-        ? "/images/profile-photo-male.png"
+        ? "/images/main/profile-photo-male.png"
         // if false :
-        : "/images/profile-photo-female.png";
+        : "/images//main/profile-photo-female.png";
 
     // validation logic
     const user = await User.create({
