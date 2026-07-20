@@ -19,18 +19,20 @@
 
         <img src="/images/<%=book.coverPhoto%>" alt="coverPhoto" style="width: 90px; height: 120px; object-fit: cover;">
         
-        <p>Authors: <% for (let author of book.authors) { %>
-                        <%= author.authorName %><br> 
-                    <% } %></p>
+        <p>Authors:</p>
+            <% for (let author of book.authors) { %>
+                <ul><li><%= author.authorName %></li></ul>
+            <% } %>
 
         <p>Published: <%= book.publishedDate? book.publishedDate.toLocaleDateString("en-GB")
         : "Unknown" %></p>
         
         <p>Description: <%= book.description %></p>
         
-        <p>Genres: <% for (let genre of book.genres) { %>
-                        <%= genre.genre %><br>
-                    <% } %></p>
+        <p>Genres:</p>
+            <% for (let genre of book.genres) { %>
+                <ul><li><%= genre.genre %></li></ul>
+            <% } %>
         
         <p>Page Count: <%= book.pageCount %></p>
         

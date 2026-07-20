@@ -3,14 +3,16 @@ const isSignedIn = require("../middleware/is-signed-in");
 const bcrypt = require("bcrypt");
 const User = require("../models/user.js");
 const Author = require("../models/author.js");
+const Book = require("../models/book.js");
 
 
 
 router.get("/", isSignedIn, async (req, res) => {
     const user = await User.findById(req.session.user._id);
     const following = await Author.find({ followers: req.session.user._id })
+    const liked = await Book.find({ likes: req.session.user._id })
 
-    res.render("user/dashboard.ejs", { user, following });
+    res.render("user/dashboard.ejs", { user, following, liked });
 });
 
 router.post("/change-password", isSignedIn, async (req, res) => {
