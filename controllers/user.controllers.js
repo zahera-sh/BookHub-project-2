@@ -6,7 +6,6 @@ const Author = require("../models/author.js");
 const Book = require("../models/book.js");
 
 
-
 router.get("/", isSignedIn, async (req, res) => {
     const user = await User.findById(req.session.user._id);
     const following = await Author.find({ followers: req.session.user._id })
@@ -52,7 +51,6 @@ router.get("/:id/confirm-delete", isSignedIn, async (req, res) => {
     const foundUser = await User.findById(req.params.id)
     res.render("user/delete-user.ejs")
 });
-
 
 
 module.exports = router;

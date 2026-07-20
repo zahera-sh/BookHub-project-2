@@ -12,7 +12,6 @@ const upload = multer({ storage: storage });
 const Author = require("../models/author.js");
 
 
-
 router.get("/", async (req, res) => {
     const allAuthors = await Author.find()
     res.render("author/all-authors.ejs", { authors: allAuthors });
@@ -75,7 +74,6 @@ router.post("/:id/unfollow", isSignedIn, async (req, res) => {
     foundAuthor.save()
     res.redirect("/authors/" + foundAuthor._id)
 });
-
 
 
 module.exports = router;

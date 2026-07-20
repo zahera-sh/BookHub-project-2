@@ -5,7 +5,6 @@ dns.setServers(['8.8.8.8', '1.1.1.1']);
 const genre = require("./models/genre.js");
 
 
-
 const genres = [
     { genre: "Action" },
     { genre: "Adventure" },
@@ -61,11 +60,10 @@ const genres = [
 ];
 
 
-
 async function seed() {
     await connectToDB()
     await genre.insertMany(genres)
     console.log("DB Seeded")
-}
+};
 
-seed()
+seed();

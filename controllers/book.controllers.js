@@ -15,7 +15,6 @@ const Author = require("../models/author.js");
 const Genre = require("../models/genre.js");
 
 
-
 router.get("/", async (req, res) => {
     const allBooks = await Book.find()
     res.render("book/all-books.ejs", { books: allBooks });
@@ -92,7 +91,6 @@ router.post("/:id/dislike", isSignedIn, async (req, res) => {
     foundBook.save()
     res.redirect("/valley/" + foundBook._id)
 });
-
 
 
 module.exports = router;

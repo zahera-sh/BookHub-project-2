@@ -1,5 +1,4 @@
-const mongoose = require("mongoose")
-
+const mongoose = require("mongoose");
 
 
 async function connectToDB(){
@@ -10,8 +9,7 @@ async function connectToDB(){
     catch(error){
         console.log("Error Occured", error)
     }
-}
+};
 
 
-
-module.exports = connectToDB
+module.exports = connectToDB;
