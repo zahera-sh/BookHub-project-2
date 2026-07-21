@@ -40,11 +40,12 @@ const librarySchema = new mongoose.Schema({
 
     isFavorited: {
         type: Boolean,
-        default: true,
+        default: false,
     },
 
     isFinished: {
         type: Boolean,
+        default: false,
     },
 
 }, { timestamps: true });

@@ -15,12 +15,52 @@
 
         <h1>My Library</h1>
 
+        <section id="booksInLibrary">
         <% for(let addedBook of mylibrary){ %>
-            <img src="/images/books/<%=addedBook.book.coverPhoto%>" alt="coverPhoto" style="width: 90px; height: 120px; object-fit: cover;">
-            <br>
-            <a href="/valley/<%=addedBook._id%>"><%= addedBook.book.title %></a>
-            <hr>
+            
+            <div class="bookinLibrary">
+
+                <img src="/images/books/<%=addedBook.book.coverPhoto%>" alt="coverPhoto" style="width: 90px; height: 120px; object-fit: cover;">
+                <br><a href="/valley/<%=addedBook._id%>"><%= addedBook.book.title %></a>
+
+                <p>Reaading status: <%= addedBook.status %></p>
+
+                <p>Date started: <%= addedBook.dateStarted
+                                    ? addedBook.dateStarted.toLocaleDateString("en-GB")
+                                    : "Not started" %></p>
+                
+                <p>Date finished: <%= addedBook.dateFinished
+                                    ? addedBook.dateFinished.toLocaleDateString("en-GB")
+                                    : "Not finished" %></p>
+                
+                <p>Notes: <%= addedBook.notes %></p>
+
+                <form action="/mylibrary/<%= addedBook._id %>/favorite" method="post">
+                    <button type="submit">
+                        <%= addedBook.isFavorited ? "🩷" : "🩶" %>
+                    </button>
+                </form>
+
+                <form action="/mylibrary/<%= addedBook._id %>/finish" method="post">
+                    <button type="submit">
+                        <%= addedBook.isFinished ? "📘" : "📖" %>
+                    </button>
+                </form><br>
+
+                <form action="/mylibrary/<%= addedBook._id %>/edit" method="get">
+                <button>Edit Book</button>
+                </form>
+
+                <form action="/mylibrary/<%= addedBook._id %>?_method=DELETE" method="POST" onsubmit="return confirm('This action cannot be undone. Are you sure you want to remove this book from your library?')">
+                <button type="submit">❌</button>
+                </form>
+
+                <hr>
+
+            </div>
+
         <% } %>
+        </section>
 
 
 </body>
