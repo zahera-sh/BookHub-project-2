@@ -4,12 +4,12 @@ const mongoose = require("mongoose");
 
 const librarySchema = new mongoose.Schema({
 
-    Username: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
     },
 
-    title: {
+    book: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Book",
     },
@@ -20,12 +20,9 @@ const librarySchema = new mongoose.Schema({
             "Want to Read",
             "Reading",
             "Finished",
-            "Dropped"
+            "Dropped",
         ],
-    },
-
-    dateAdded: {
-        type: Date,
+        default: "Reading",
     },
 
     dateStarted: {
@@ -52,6 +49,11 @@ const librarySchema = new mongoose.Schema({
 
 }, { timestamps: true });
 
+
+librarySchema.index(
+    { user: 1, book: 1 },
+    { unique: true }
+);
 
 
 const Library = mongoose.model("Library", librarySchema);

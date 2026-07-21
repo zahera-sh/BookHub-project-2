@@ -16,7 +16,7 @@ const Genre = require("../models/genre.js");
 
 
 router.get("/", async (req, res) => {
-    const allBooks = await Book.find()
+    const allBooks = await Book.find().sort({ title: 1 }) 
     res.render("book/all-books.ejs", { books: allBooks });
 });
 
@@ -73,7 +73,7 @@ router.post("/", isSignedIn, upload.single("coverPhoto"), async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     console.log(req.params.id)
-    const foundBook = await Book.findById(req.params.id).populate('genres authors')
+    const foundBook = await Book.findById(req.params.id).populate("genres authors")
     res.render("book/book-details.ejs", { book: foundBook })
 });
 

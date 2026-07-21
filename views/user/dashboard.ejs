@@ -20,19 +20,19 @@
 
         <img src="<%=user.profilePhoto%>" alt="profile-photo" style="width: 100px; height: 100px;">
 
-        <p>Liked Books: </p>
+        <p>Liked Books: <%= liked.length %></p>
             <% for(let onelike of liked){ %>
                 <ul><li><a href="/valley/<%=onelike._id%>"><%=onelike.title%></a></li></ul>
             <% } %>
 
         <p>Reviews: </p>
 
-        <p>Following:</p>
+        <p>Following: <%= following.length %></p>
             <% for(let onefollow of following){ %>
                 <ul><li><a href="/authors/<%=onefollow._id%>"><%=onefollow.authorName%></a></li></ul>
             <% } %>
 
-        <a href="">My Library</a>
+        <a href="/mylibrary">My Library</a>
 
         <p>Contributions</p>
         <p>Books: </p>

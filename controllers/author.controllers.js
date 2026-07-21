@@ -13,7 +13,7 @@ const Author = require("../models/author.js");
 
 
 router.get("/", async (req, res) => {
-    const allAuthors = await Author.find()
+    const allAuthors = await Author.find().sort({ authorName: 1 }) 
     res.render("author/all-authors.ejs", { authors: allAuthors });
 });
 
