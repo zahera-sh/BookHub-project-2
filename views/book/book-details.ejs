@@ -144,6 +144,13 @@
             <% } %>
         <% } %>
 
+
+        <% if(user && user.isAdmin){ %>
+            <form action="/valley/<%= book._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this author?')">
+                <button>Delete Book</button>
+            </form>
+        <% } %>
+
 </body>
 
 </html>

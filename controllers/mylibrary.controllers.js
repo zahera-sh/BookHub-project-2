@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const isSignedIn = require("../middleware/is-signed-in");
-const User = require("../models/user.js");
-const Book = require("../models/book.js");
-const Library = require("../models/library.js");
+const User = require("../models/User.js");
+const Book = require("../models/Book.js");
+const Library = require("../models/Library.js");
 
 
 router.get("/", isSignedIn, async (req, res) => {

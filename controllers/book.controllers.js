@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const isSignedIn = require("../middleware/is-signed-in");
+const isAdmin = require("../middleware/is-admin");
 const multer = require("multer");
 const path = require("path");
 const storage = multer.diskStorage({
@@ -13,6 +14,7 @@ const User = require("../models/User.js");
 const Book = require("../models/Book.js");
 const Author = require("../models/Author.js");
 const Genre = require("../models/Genre.js");
+const Library = require("../models/Library");
 const Review = require("../models/Review.js");
 
 
@@ -78,14 +80,24 @@ router.post("/", isSignedIn, upload.single("coverPhoto"), async (req, res) => {
 router.get("/:id", async (req, res) => {
     const foundBook = await Book.findById(req.params.id).populate("genres authors");
     const reviews = await Review.find({ book: req.params.id }).populate("user");
+    let user = null;
 
-    const userReview = req.session.user
-        ? await Review.findOne({ user: req.session.user._id, book: req.params.id })
-        : null
+    if (req.session.user) {
+        user = await User.findById(
+            req.session.user._id
+        );
+    }
+
+    const userReview = user
+        ? await Review.findOne({
+            user: user._id,
+            book: req.params.id
+        })
+        : null;
 
     const editMode = req.query.edit
 
-    res.render("book/book-details.ejs", { book: foundBook, reviews, user: req.session.user, userReview, editMode, });
+    res.render("book/book-details.ejs", { book: foundBook, reviews, user, userReview, editMode, });
 });
 
 
@@ -110,6 +122,23 @@ router.post("/:id/dislike", isSignedIn, async (req, res) => {
 
     await foundBook.save();
     res.redirect("/valley/" + foundBook._id);
+});
+
+
+router.delete("/:id", isSignedIn, isAdmin, async (req, res) => {
+
+    const user = await User.findById(req.session.user._id);
+
+    if (!user.isAdmin) {
+        return res.send("Unauthorized.");
+    }
+
+    await Review.deleteMany({ book: req.params.id });
+    await Library.deleteMany({ book: req.params.id });
+    await Book.findByIdAndDelete(req.params.id);
+
+    res.redirect("/valley");
+
 });
 
 

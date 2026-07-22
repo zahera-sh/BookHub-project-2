@@ -14,6 +14,7 @@ dns.setServers(["8.8.8.8", "1.1.1.1"]);
 
 
 const isSignedIn = require("./middleware/is-signed-in.js");
+const isAdmin = require("./middleware/is-admin.js");
 const passUserToView = require("./middleware/pass-user-to-view.js");
 
 
