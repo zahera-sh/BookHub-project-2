@@ -9,8 +9,8 @@ const storage = multer.diskStorage({
     },
 });
 const upload = multer({ storage: storage });
-const Author = require("../models/author.js");
-const Book = require("../models/book.js");
+const Author = require("../models/Author.js");
+const Book = require("../models/Book.js");
 
 
 router.get("/", async (req, res) => {

@@ -38,18 +38,111 @@
 
 
         <% if(user && book.likes.some((oneId) => oneId.equals(user._id))) { %>
-            <form action="/valley/<%= book._id %>/dislike" method="post">
-            <button>🩷</button>
+            <form action="/valley/<%= book._id %>/dislike" method="POST">
+            <button title="dislike">🩷</button>
             </form>
         <% } else { %>
-            <form action="/valley/<%= book._id %>/like" method="post">
-            <button>🩶</button>
+            <form action="/valley/<%= book._id %>/like" method="POST">
+            <button title="like">🩶</button>
             </form>
         <% } %>
 
-        <form action="/mylibrary/<%= book._id %>" method="post">
-        <button type="submit">➕</button>
+        <form action="/mylibrary/<%= book._id %>" method="POST">
+        <button title="add to library" type="submit">➕</button>
         </form>
+
+<hr>
+
+        <h2>Reviews</h2>
+
+        <% if(user && !userReview){ %>
+        <form action="/reviews/<%= book._id %>" method="POST">
+
+            <label for="rating">Rating</label>
+            <select name="rating" id="rating" required>
+                <option value="" selected disabled>Rate the Book</option>
+                <option value="1">⭐</option>
+                <option value="2">⭐⭐</option>
+                <option value="3">⭐⭐⭐</option>
+                <option value="4">⭐⭐⭐⭐</option>
+                <option value="5">⭐⭐⭐⭐⭐</option>
+            </select>
+
+            <label for="spoilers">Spoilers</label>
+            <input name="spoilers" id="spoilers" type="checkbox">
+
+            <label for="reviewTitle">Title</label>
+            <input name="reviewTitle" id="reviewTitle" type="text" rows="8" maxlength="100" required>
+
+            <label for="reviewBody">Review</label>
+            <textarea name="reviewBody" id="reviewBody" minlength="10" maxlength="500" required></textarea>
+
+            <button title="leave a review" type="submit">✍🏻</button>
+
+        </form>
+        <% } %>
+
+        
+        <% if(userReview && !editMode){ %>
+        <p><%= userReview.user.username %>'s Review</p>
+
+            <p><%= "⭐".repeat(userReview.rating) %> <%= userReview.rating %>/5</p>
+            <% if(userReview.spoilers){ %><p>⚠️ Spoilers</p><% } %>
+
+            <p><%= userReview.reviewTitle %></p>
+            <p><%= userReview.reviewBody %></p>
+
+            <a href="/valley/<%= book._id %>?edit=true" title="modify">📝</a>
+
+            <form action="/reviews/<%= userReview._id %>?_method=DELETE" method="POST" onsubmit="return confirm('This action cannot be undone. Are you sure you want to remove your review?')">
+                <button title="delete review" type="submit">❌</button>
+            </form>
+        <% } %>
+
+
+        <% if(userReview && editMode){ %>
+        <form action="/reviews/<%= userReview._id %>?_method=PUT" method="POST">
+
+            <label for="rating">Rating</label>
+            <select name="rating" id="rating" required>
+                <option value="1" <%= userReview.rating ===1 ? "selected":"" %>>⭐</option>
+                <option value="1" <%= userReview.rating ===2 ? "selected":"" %>>⭐⭐</option>
+                <option value="1" <%= userReview.rating ===3 ? "selected":"" %>>⭐⭐⭐</option>
+                <option value="1" <%= userReview.rating ===4 ? "selected":"" %>>⭐⭐⭐⭐</option>
+                <option value="1" <%= userReview.rating ===5 ? "selected":"" %>>⭐⭐⭐⭐⭐</option>
+            </select>
+
+            <label for="spoilers">Spoilers</label>
+            <input name="spoilers" id="spoilers" type="checkbox" <%= userReview.spoilers ? "checked" : "" %>>
+
+            <label for="reviewTitle">Title</label>
+            <input name="reviewTitle" id="reviewTitle" type="text" value="<%= userReview.reviewTitle %>" rows="8" maxlength="100" required>
+
+            <label for="reviewBody">Review</label>
+            <textarea name="reviewBody" id="reviewBody" minlength="10" maxlength="500" required><%= userReview.reviewBody %></textarea>
+
+            <button title="leave a review" type="submit">✍🏻</button>
+        
+        </form>
+
+            <a href="/valley/<%= book._id %>" title="cancel">❌</a>
+        <% } %>
+
+<hr>
+
+        <% for(let review of reviews){ %>
+            <% if(!user || !review.user._id.equals(user._id)){ %>
+
+                <p><%= "⭐".repeat(review.rating) %><%= review.rating %>/5</p>
+                <p><%= review.user.username %> says:</p>
+                
+                <% if(review.spoilers){ %><p>⚠️ Spoilers</p><% } %>
+                
+                <p>Title: <%= review.reviewTitle %></p>
+                <p>Review: <%= review.reviewBody %></p>
+
+            <% } %>
+        <% } %>
 
 </body>
 

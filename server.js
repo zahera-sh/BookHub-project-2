@@ -23,6 +23,7 @@ const indexController = require("./controllers/index.controllers.js");
 const bookController = require("./controllers/book.controllers.js");
 const authorController = require("./controllers/author.controllers.js");
 const mylibraryController = require("./controllers/mylibrary.controllers.js");
+const reviewController = require("./controllers/review.controllers.js");
 
 
 app.use(express.static("public"));
@@ -55,6 +56,7 @@ app.use("/dashboard", userController);
 app.use("/valley", bookController);
 app.use("/authors", authorController);
 app.use("/mylibrary", mylibraryController);
+app.use("/reviews", reviewController);
 app.use("/", indexController);
 
 app.use((req, res, next) => {

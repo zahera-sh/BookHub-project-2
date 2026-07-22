@@ -28,15 +28,17 @@ const reviewSchema = new mongoose.Schema({
 
     reviewTitle: {
         type: String,
-        min: 10,
-        max: 100,
+        minlength: 5,
+        maxlength: 100,
+        trim: true,
         required: true,
     },
 
     reviewBody: {
         type: String,
-        min: 10,
-        max: 500,
+        minlength: 10,
+        maxlength: 500,
+        trim: true,
         required: true,
     },
 

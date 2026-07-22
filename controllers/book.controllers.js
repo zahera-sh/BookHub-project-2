@@ -9,10 +9,11 @@ const storage = multer.diskStorage({
     },
 });
 const upload = multer({ storage: storage });
-const User = require("../models/user.js");
-const Book = require("../models/book.js");
-const Author = require("../models/author.js");
-const Genre = require("../models/genre.js");
+const User = require("../models/User.js");
+const Book = require("../models/Book.js");
+const Author = require("../models/Author.js");
+const Genre = require("../models/Genre.js");
+const Review = require("../models/Review.js");
 
 
 router.get("/", async (req, res) => {
@@ -76,7 +77,15 @@ router.post("/", isSignedIn, upload.single("coverPhoto"), async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     const foundBook = await Book.findById(req.params.id).populate("genres authors");
-    res.render("book/book-details.ejs", { book: foundBook });
+    const reviews = await Review.find({ book: req.params.id }).populate("user");
+
+    const userReview = req.session.user
+        ? await Review.findOne({ user: req.session.user._id, book: req.params.id })
+        : null
+
+    const editMode = req.query.edit
+
+    res.render("book/book-details.ejs", { book: foundBook, reviews, user: req.session.user, userReview, editMode, });
 });
 
 
@@ -84,7 +93,7 @@ router.post("/:id/like", isSignedIn, async (req, res) => {
     const foundBook = await Book.findById(req.params.id);
 
     if (!foundBook.likes.some(id => id.equals(req.session.user._id))) {
-        
+
         foundBook.likes.push(req.session.user._id);
     }
 
@@ -96,9 +105,9 @@ router.post("/:id/like", isSignedIn, async (req, res) => {
 router.post("/:id/dislike", isSignedIn, async (req, res) => {
     const foundBook = await Book.findById(req.params.id);
     const allIdsButMyId = foundBook.likes.filter((oneId) => !oneId.equals(req.session.user._id));
-    
+
     foundBook.likes = allIdsButMyId
-    
+
     await foundBook.save();
     res.redirect("/valley/" + foundBook._id);
 });
