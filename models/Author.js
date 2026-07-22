@@ -19,7 +19,7 @@ const authorSchema = new mongoose.Schema({
 
     profilePhoto: {
         type: String,
-        default: "/default-photo.jpg",
+        default: "default-photo.jpg",
     },
 
     birthDate: {
@@ -35,15 +35,16 @@ const authorSchema = new mongoose.Schema({
         trim: true,
     },
 
-    booksByAuthor: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Book",
-    }],
-
     followers: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
     }],
+
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+    },
 
 }, { timestamps: true });
 

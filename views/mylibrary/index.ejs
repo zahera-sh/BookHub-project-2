@@ -21,7 +21,7 @@
             <div class="bookinLibrary">
 
                 <img src="/images/books/<%=addedBook.book.coverPhoto%>" alt="coverPhoto" style="width: 90px; height: 120px; object-fit: cover;">
-                <br><a href="/valley/<%=addedBook._id%>"><%= addedBook.book.title %></a>
+                <br><a href="/valley/<%= addedBook.book_id %>"><%= addedBook.book.title %></a>
 
                 <p>Reaading status: <%= addedBook.status %></p>
 
@@ -43,7 +43,7 @@
 
                 <form action="/mylibrary/<%= addedBook._id %>/finish" method="post">
                     <button type="submit">
-                        <%= addedBook.isFinished ? "📘" : "📖" %>
+                        <%= addedBook.status === "Finished" ? "📘" : "📖" %>
                     </button>
                 </form><br>
 

@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const isSignedIn = require("../middleware/is-signed-in.js");
-const multer = require("multer")
+const multer = require("multer");
 const path = require("path");
 const storage = multer.diskStorage({
     destination: "public/images/authors",
@@ -10,18 +10,22 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 const Author = require("../models/author.js");
+const Book = require("../models/book.js");
 
 
 router.get("/", async (req, res) => {
-    const allAuthors = await Author.find().sort({ authorName: 1 }) 
+    const allAuthors = await Author.find().sort({ authorName: 1 });
     res.render("author/all-authors.ejs", { authors: allAuthors });
 });
 
+
 router.get("/new", isSignedIn, (req, res) => {
-    res.render("author/new-author.ejs")
+    res.render("author/new-author.ejs");
 });
 
+
 router.post("/", isSignedIn, upload.single("profilePhoto"), async (req, res) => {
+
     try {
 
         const authorInDatabase = await Author.findOne({ authorName: req.body.authorName });
@@ -32,7 +36,7 @@ router.post("/", isSignedIn, upload.single("profilePhoto"), async (req, res) => 
         else {
             const profilePhoto = req.file
                 ? req.file.filename
-                : undefined;
+                : undefined
 
             const createdAuthor = await Author.create({
                 authorName: req.body.authorName,
@@ -41,38 +45,48 @@ router.post("/", isSignedIn, upload.single("profilePhoto"), async (req, res) => 
                 birthDate: req.body.birthDate,
                 deathDate: req.body.deathDate,
                 nationality: req.body.nationality,
+                createdBy: req.session.user._id,
+            });
 
-            })
-
-            console.log(createdAuthor._id)
-            res.redirect("/authors")
+            res.redirect("/authors");;
         }
     }
 
     catch (err) {
-        console.log("Error", err)
+        console.log("Error", err);
     }
 });
 
+
 router.get("/:id", async (req, res) => {
-    console.log(req.params.id)
-    const foundAuthor = await Author.findById(req.params.id)
-    res.render("author/author-details.ejs", { author: foundAuthor })
+    const foundAuthor = await Author.findById(req.params.id);
+    const booksByAuthor = await Book.find({ authors: req.params.id });
+
+    res.render("author/author-details.ejs", { author: foundAuthor, booksByAuthor });
 });
 
-router.post("/follow/:id", isSignedIn, async (req, res) => {
-    const foundAuthor = await Author.findById(req.params.id)
-    foundAuthor.followers.push(req.session.user._id)
-    foundAuthor.save()
-    res.redirect(`/authors/${foundAuthor._id}`)
+
+router.post("/:id/follow", isSignedIn, async (req, res) => {
+    const foundAuthor = await Author.findById(req.params.id);
+
+    if (!foundAuthor.followers.some(id => id.equals(req.session.user._id))) {
+
+        foundAuthor.followers.push(req.session.user._id);
+    }
+
+    await foundAuthor.save();
+    res.redirect(`/authors/${foundAuthor._id}`);
 });
+
 
 router.post("/:id/unfollow", isSignedIn, async (req, res) => {
-    const foundAuthor = await Author.findById(req.params.id)
-    const allIdsButMyId = foundAuthor.followers.filter((oneId) => !oneId.equals(req.session.user._id))
+    const foundAuthor = await Author.findById(req.params.id);
+    const allIdsButMyId = foundAuthor.followers.filter((oneId) => !oneId.equals(req.session.user._id));
+
     foundAuthor.followers = allIdsButMyId
-    foundAuthor.save()
-    res.redirect("/authors/" + foundAuthor._id)
+
+    await foundAuthor.save();
+    res.redirect("/authors/" + foundAuthor._id);
 });
 
 

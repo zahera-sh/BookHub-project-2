@@ -8,6 +8,7 @@ router.get("/sign-up", (req, res) => {
   res.render("auth/sign-up.ejs");
 });
 
+
 router.post("/sign-up", async (req, res) => {
 
   try {
@@ -27,7 +28,7 @@ router.post("/sign-up", async (req, res) => {
     const profilePhoto =
       req.body.gender === "M"
         ? "/images/main/profile-photo-male.png"
-        : "/images//main/profile-photo-female.png";
+        : "/images/main/profile-photo-female.png";
 
     const user = await User.create({
       username: req.body.username,
@@ -49,9 +50,11 @@ router.post("/sign-up", async (req, res) => {
 });
 
 
+
 router.get("/sign-in", (req, res) => {
   res.render("auth/sign-in.ejs");
 });
+
 
 router.post("/sign-in", async (req, res) => {
 
@@ -76,6 +79,7 @@ router.post("/sign-in", async (req, res) => {
 
   res.redirect("/dashboard");
 });
+
 
 router.get("/sign-out", (req, res) => {
   req.session.destroy();

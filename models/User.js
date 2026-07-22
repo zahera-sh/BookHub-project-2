@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
     trim: true,
-    match: [/^[a-zA-Z0-9]{3,12}$/, "Username must be alphanumeric and 3-16 characters long"],
+    match: [/^[a-zA-Z0-9]{3,12}$/, "Username must be alphanumeric and 3-12 characters long"],
   },
 
   password: {
@@ -36,6 +36,16 @@ const userSchema = new mongoose.Schema({
   isDeleted: {
     type: Boolean,
     default: false,
+  },
+
+  deletedAt: {
+    type: Date,
+  },
+
+  aboutMe: {
+    type: String,
+    trim: true,
+    maxlength: 250,
   },
 
 }, { timestamps: true });

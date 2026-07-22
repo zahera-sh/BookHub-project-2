@@ -13,13 +13,16 @@
 
     <%- include("../partials/navbar") %>
 
-        <h1>Are you sure you want to delete your account?</h1>
+        <p>We're sad to see you go, but we hope your next adventure is amazing! Our digital door is always unlocked for you.</p>
+        
+        
+        <p>Are you sure you want to delete your account?</p>
 
-        <form action="/dashboard/updateIsDeleted/<%=user._id%>?_method=PUT" method="POST">
+        <form action="/dashboard/<%=user._id%>/delete?_method=PUT" method="POST">
             <button>Delete</button>
         </form>
 
-        <a href="/">Return to BookHub 📖✨</a>
+        <a href="/">...or Return to BookHub 📖✨</a>
 
 </body>
 

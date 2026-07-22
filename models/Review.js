@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 const reviewSchema = new mongoose.Schema({
 
-    Username: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
     },
@@ -42,6 +42,11 @@ const reviewSchema = new mongoose.Schema({
 
 }, { timestamps: true });
 
+
+reviewSchema.index(
+    { user: 1, book: 1 },
+    { unique: true }
+);
 
 
 const Review = mongoose.model("Review", reviewSchema);

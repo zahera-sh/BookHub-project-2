@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BookHub | Sign In</title>
+  <title>BookHub | Login</title>
   <link rel="icon" href="/images/main/BookHub-logo-mini.png" type="image/png">
   <link rel="stylesheet" href="/css/style-for-all.css">
 </head>
@@ -18,12 +18,12 @@
     <form action="/auth/sign-in" method="POST">
 
       <label for="username">Username:</label>
-      <input type="text" name="username" id="username" />
+      <input type="text" name="username" id="username" required/>
       
       <label for="password">Password:</label>
-      <input type="password" name="password" id="password" />
+      <input type="password" name="password" id="password" required/>
       
-      <button type="submit">Sign in</button>
+      <button type="submit">Login</button>
     
     </form>
 

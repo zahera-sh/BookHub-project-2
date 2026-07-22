@@ -36,14 +36,10 @@ const librarySchema = new mongoose.Schema({
     notes: {
         type: String,
         trim: true,
+        maxlength: 500,
     },
 
     isFavorited: {
-        type: Boolean,
-        default: false,
-    },
-
-    isFinished: {
         type: Boolean,
         default: false,
     },

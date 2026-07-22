@@ -4,9 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        BookHub | <%= author.authorName %>
-    </title>
+    <title>BookHub | <%= author.authorName %></title>
     <link rel="icon" href="/images/main/BookHub-logo-mini.png" type="image/png">
     <link rel="stylesheet" href="/css/style-for-all.css">
 </head>
@@ -29,19 +27,25 @@
         : "Still Alive"%></p>
         
         <p>Nationality: <%= author.nationality %></p>
-        
-        <p>Books By Author: <%= author.booksByAuthor %></p>
-        
+                
         <p>Followers: <%= author.followers.length %></p>
+
+        <p>Books By Author:</p>
+
+        <% for (let book of booksByAuthor) { %>
+            <ul>
+                <li><a href="/valley/<%= book._id %>"><%= book.title %></a></li>
+            </ul>
+        <% } %>
 
 
 
         <% if(user && author.followers.some((oneId) => oneId.equals(user._id))) { %>
-            <form action="/authors/<%= author._id %>/unfollow" method="post">
+            <form action="/authors/<%= author._id %>/unfollow" method="POST">
                 <button>Unfollow</button>
             </form>
         <% } else { %>
-            <form action="/authors/follow/<%= author._id %>" method="post">
+            <form action="/authors/<%= author._id %>/follow" method="POST">
                 <button>Follow</button>
             </form>
         <% } %>

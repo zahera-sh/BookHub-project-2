@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Library | Update Book</title>
+    <title>BookHub | Update Library</title>
     <link rel="icon" href="/images/main/BookHub-logo-mini.png" type="image/png">
     <link rel="stylesheet" href="/css/style-for-all.css">
 </head>
@@ -46,9 +46,9 @@
         </aside>
 
         <section>
-            <p>Update <%= myBookEdit.title %></p>
+            <p>Update <%= myBookEdit.book.title %></p>
 
-            <form action="/mylibrary/<%= myBookEdit._id %>/edit?_method=PUT" method="post">
+            <form action="/mylibrary/<%= myBookEdit._id %>/edit?_method=PUT" method="POST">
 
                 <label for="status">Reading Status:</label>
                 <select name="status" id="status">
@@ -65,7 +65,7 @@
                 <input type="date" name="dateFinished" id="dateFinished">
 
                 <label for="notes">Notes:</label>
-                <input type="text" name="notes" id="notes"></input>
+                <input type="text" name="notes" id="notes" maxlength="500"></input>
 
                 <button type="submit">Update</button>
             </form>

@@ -15,42 +15,48 @@
 
         <h1>Dashboard</h1>
 
-        <p>Welcome <%= user.username %>
-        </p>
+        <p>Welcome <%= user.username %></p>
 
         <img src="<%=user.profilePhoto%>" alt="profile-photo" style="width: 100px; height: 100px;">
 
-        <p>Liked Books: <%= liked.length %></p>
-            <% for(let onelike of liked){ %>
-                <ul><li><a href="/valley/<%=onelike._id%>"><%=onelike.title%></a></li></ul>
-            <% } %>
+            <a href="/mylibrary">My Library</a>
+                <p>Books in Library: <%= libraryCount.length %></p>
 
-        <p>Reviews: </p>
-
-        <p>Following: <%= following.length %></p>
+            <p>Following: <%= following.length %></p>
             <% for(let onefollow of following){ %>
-                <ul><li><a href="/authors/<%=onefollow._id%>"><%=onefollow.authorName%></a></li></ul>
+                <ul class="followedAuthorsList">
+                    <li><a href="/authors/<%=onefollow._id%>"><%=onefollow.authorName%></a></li>
+                </ul>
+            <% } %>
+            
+            <p>Liked Books: <%= liked.length %></p>
+            <% for(let onelike of liked){ %>
+                <ul class="likedBooksList">
+                    <li><a href="/valley/<%=onelike._id%>"><%=onelike.title%></a></li>
+                </ul>
             <% } %>
 
-        <a href="/mylibrary">My Library</a>
+            <p>Reviews: <%= reviewCount.length %></p>
 
-        <p>Contributions</p>
-        <p>Books: </p>
-        <p>Authors: </p>
-
+            <p>Contributions</p>
+                <p>Books Added: <%= booksAdded.length %></p>
+                <p>Authors Added: <%= authorsAdded.length %></p>
+                    <p>Total: <%= booksAdded.length + authorsAdded.length %></p>
+<hr>
         <p>Danger Zone:</p>
 
-        <form action="/dashboard/change-password" method="POST">
-            <label for="password">New Password</label>
-            <input type="password" name="password" id="password" minlength="8" required />
+            <form action="/dashboard/change-password" method="POST">
+                <label for="currentPassword">Current Password</label>
+                <input type="password" name="currentPassword" id="currentPassword" required>
 
-            <label for="confirmPassword">Confirm Password</label>
-            <input type="password" name="confirmPassword" id="confirmPassword" required />
+                <label for="password">New Password</label>
+                <input type="password" name="password" id="password" minlength="8" required />
 
-            <button type="submit">Confirm</button>
-        </form>
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" name="confirmPassword" id="confirmPassword" required />
 
-        <p>Danger Zone Danger Zone Danger Zone Danger Zone:</p>
+                <button type="submit">Confirm</button>
+            </form>
 
         <form action="/dashboard/<%=user._id%>/confirm-delete" method="GET">
             <button>Delete Account</button>

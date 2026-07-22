@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const isSignedIn = require("../middleware/is-signed-in");
-const multer = require("multer")
+const multer = require("multer");
 const path = require("path");
 const storage = multer.diskStorage({
     destination: "public/images/books",
@@ -16,9 +16,10 @@ const Genre = require("../models/genre.js");
 
 
 router.get("/", async (req, res) => {
-    const allBooks = await Book.find().sort({ title: 1 }) 
+    const allBooks = await Book.find().sort({ title: 1 });
     res.render("book/all-books.ejs", { books: allBooks });
 });
+
 
 router.get("/new", isSignedIn, async (req, res) => {
 
@@ -37,6 +38,7 @@ router.get("/new", isSignedIn, async (req, res) => {
     }
 });
 
+
 router.post("/", isSignedIn, upload.single("coverPhoto"), async (req, res) => {
 
     try {
@@ -49,7 +51,7 @@ router.post("/", isSignedIn, upload.single("coverPhoto"), async (req, res) => {
         else {
             const coverPhoto = req.file
                 ? req.file.filename
-                : undefined;
+                : undefined
 
             const createdBook = await Book.create({
                 title: req.body.title,
@@ -59,37 +61,46 @@ router.post("/", isSignedIn, upload.single("coverPhoto"), async (req, res) => {
                 genres: req.body.genres,
                 pageCount: req.body.pageCount,
                 coverPhoto,
-            })
+                createdBy: req.session.user._id,
+            });
 
-            console.log(createdBook._id)
-            res.redirect("/valley")
+            res.redirect("/valley");
         }
     }
 
     catch (err) {
-        console.log("Error", err)
+        console.log("Error", err);
     }
 });
 
+
 router.get("/:id", async (req, res) => {
-    console.log(req.params.id)
-    const foundBook = await Book.findById(req.params.id).populate("genres authors")
-    res.render("book/book-details.ejs", { book: foundBook })
+    const foundBook = await Book.findById(req.params.id).populate("genres authors");
+    res.render("book/book-details.ejs", { book: foundBook });
 });
 
-router.post("/like/:id", isSignedIn, async (req, res) => {
-    const foundBook = await Book.findById(req.params.id)
-    foundBook.likes.push(req.session.user._id)
-    foundBook.save()
-    res.redirect(`/valley/${foundBook._id}`)
+
+router.post("/:id/like", isSignedIn, async (req, res) => {
+    const foundBook = await Book.findById(req.params.id);
+
+    if (!foundBook.likes.some(id => id.equals(req.session.user._id))) {
+        
+        foundBook.likes.push(req.session.user._id);
+    }
+
+    await foundBook.save();
+    res.redirect(`/valley/${foundBook._id}`);
 });
+
 
 router.post("/:id/dislike", isSignedIn, async (req, res) => {
-    const foundBook = await Book.findById(req.params.id)
-    const allIdsButMyId = foundBook.likes.filter((oneId) => !oneId.equals(req.session.user._id))
+    const foundBook = await Book.findById(req.params.id);
+    const allIdsButMyId = foundBook.likes.filter((oneId) => !oneId.equals(req.session.user._id));
+    
     foundBook.likes = allIdsButMyId
-    foundBook.save()
-    res.redirect("/valley/" + foundBook._id)
+    
+    await foundBook.save();
+    res.redirect("/valley/" + foundBook._id);
 });
 
 
