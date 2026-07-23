@@ -3,8 +3,6 @@
 ## Description
 BookHub is readers' source for *discovering*, *organizing*, and *sharing* books. Users can browse books, build a personal library, track their reading progress, write reviews, rate books, and connect with a community of readers in one place 🤩💫
 
-## Getting started
-
 ## Features
 - Create and manage a BookHub account.
 - Browse and review books in The Valley.
@@ -17,6 +15,24 @@ BookHub is readers' source for *discovering*, *organizing*, and *sharing* books.
 - Admins can manage book and author entries.
 
 ## Screenshots
+📸 **Homepage:**
+![homepage](public/images/main/SS-homepage.png)
+
+📸 **Error 404:**
+![error404](public/images/main/SS-errorpage.png)
+
+📸 **Dashboard:**
+![dashboard](public/images/main/SS-dashboard.png)
+
+📸 **My Library:**
+![mylibrary](public/images/main/SS-library.png)
+
+📸 **The Valley:**
+![booksvalley](public/images/main/SS-books.png)
+
+📸 **Authors:**
+![authors](public/images/main/SS-authors.png)
+
 
 ## User Stories
 - As a user, I want to see a clear homepage with easy navigation.
@@ -49,8 +65,6 @@ BookHub is readers' source for *discovering*, *organizing*, and *sharing* books.
 |--------|-------|------------|
 | GET | `/` | Displays the BookHub homepage. |
 
----
-
 ### Authentication
 
 | Method | Route | Description |
@@ -61,8 +75,6 @@ BookHub is readers' source for *discovering*, *organizing*, and *sharing* books.
 | POST | `/auth/sign-in` | Authenticates and signs in a user. |
 | GET | `/auth/sign-out` | Signs the current user out. |
 
----
-
 ### User Dashboard
 
 | Method | Route | Description |
@@ -71,8 +83,6 @@ BookHub is readers' source for *discovering*, *organizing*, and *sharing* books.
 | POST | `/dashboard/change-password` | Updates the user's password. |
 | GET | `/dashboard/:id/confirm-delete` | Displays the account deletion confirmation page. |
 | PUT | `/dashboard/:id/delete` | Permanently deletes the user's account. |
-
----
 
 ### My Library
 
@@ -86,8 +96,6 @@ BookHub is readers' source for *discovering*, *organizing*, and *sharing* books.
 | POST | `/mylibrary/:id/favorite` | Toggles a book's favorite status. |
 | POST | `/mylibrary/:id/finish` | Marks a book as finished reading. |
 
----
-
 ### Authors
 
 | Method | Route | Description |
@@ -100,8 +108,6 @@ BookHub is readers' source for *discovering*, *organizing*, and *sharing* books.
 | POST | `/authors/:id/follow` | Follows an author. |
 | POST | `/authors/:id/unfollow` | Unfollows an author. |
 
----
-
 ### The Valley (Books)
 
 | Method | Route | Description |
@@ -113,8 +119,6 @@ BookHub is readers' source for *discovering*, *organizing*, and *sharing* books.
 | DELETE | `/valley/:id` | Deletes a book (Admin only). |
 | POST | `/valley/:id/like` | Likes a book. |
 | POST | `/valley/:id/dislike` | Removes a like from a book. |
-
----
 
 ### Reviews
 
