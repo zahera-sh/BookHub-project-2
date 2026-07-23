@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BookHub | Authors</title>
     <link rel="icon" href="/images/main/BookHub-logo-mini.png" type="image/png">
+    <link rel="stylesheet" href="/css/show-all.css">
     <link rel="stylesheet" href="/css/style-for-all.css">
 </head>
 
@@ -14,12 +15,17 @@
     <%- include("../partials/navbar") %>
 
         <h1>Find your favourite Authors</h1>
-
-        <% for(let oneAuthor of authors){ %>
-            <img src="/images/authors/<%=oneAuthor.profilePhoto%>" alt="profilePhoto" style="width: 90px; height: 120px; object-fit: cover;">
-            <a href="/authors/<%=oneAuthor._id%>"><%= oneAuthor.authorName %></a>
-            <hr>
-        <% } %>
+        <div class="card-container">
+            <% for(let oneAuthor of authors){ %>
+                <div class="card">
+                    <img src="/images/authors/<%=oneAuthor.profilePhoto%>" alt="profilePhoto"
+                        style="width: 90px; height: 120px; object-fit: cover;">
+                    <a href="/authors/<%=oneAuthor._id%>">
+                        <%= oneAuthor.authorName %>
+                    </a>
+                </div>
+                <% } %>
+        </div>
 
 </body>
 

@@ -1,0 +1,81 @@
+body{
+    min-height:100vh;
+    margin:0;
+    text-align:center;
+}
+
+
+.delete-container{
+    width:800px;
+    margin:100px auto;
+    padding:60px;
+    background-color:rgba(255,255,255,.45);
+    backdrop-filter:blur(10px);
+    border-radius:30px;
+    border:2px solid #D6CAE6;
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.15);
+}
+
+
+.delete-container h1{
+    font-size:64px;
+    color:#6B5A57;
+    margin-bottom:40px;
+}
+
+
+.delete-container p{
+    font-size:24px;
+    color:#6B5A57;
+    line-height:40px;
+    margin-bottom:30px;
+}
+
+
+.delete-container form{
+    margin:40px 0;
+}
+
+
+.delete-container button{
+    padding:18px 40px;
+    font-size:24px;
+    font-weight:bold;
+    color:white;
+    background-color:#D88C8C;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+
+.delete-container button:hover{
+    background-color:#C86F6F;
+    transform:translateY(-3px);
+    box-shadow:
+    0 8px 20px rgba(0,0,0,.15);
+}
+
+
+.delete-container a{
+    display:inline-block;
+    text-decoration:none;
+    color:#6B5A57;
+    background-color:#F3D7DD;
+    padding:18px 40px;
+    border-radius:50px;
+    border:2px solid #A991B8;
+    font-size:22px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+
+.delete-container a:hover{
+    background-color:#CFE4D3;
+    transform:translateY(-3px);
+    box-shadow:
+    0 8px 20px rgba(0,0,0,.15);
+}

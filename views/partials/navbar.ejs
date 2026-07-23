@@ -1,19 +1,54 @@
 <nav>
+    <div class="main-conL">
+        <img src="/images/main/BookHub-logo-mini.png" alt="BookHub Logo">
+    </div>
     
-    <a href="/">Homepage</a>
-    <a href="/valley">The Valley</a>
-    <a href="/authors">Authors</a>
-    <% if (user){ %>
-    <a href="/dashboard">Dashboard</a>
-    <a href="/mylibrary">My Library</a>
-    <a href="/valley/new">Contribute B</a>
-    <a href="/authors/new">Contribute A</a>
-    <a href="/auth/sign-out">Logout</a>
+    <div class="main-conR">
+        <a href="/">Homepage</a>
 
-    <% } else{ %>
-    <a href="/auth/sign-up">Sign up</a>
-    <a href="/auth/sign-in">Sign in</a>
+        <a href="/valley">The Valley</a>
 
-    <% } %>
-    
+        <a href="/authors">Authors</a>
+
+
+        <% if(user){ %>
+
+            <div class="navdropdown">
+
+                <button class="navdropbtn">
+                    My Account ▼
+                </button>
+
+                <div class="navdropdown-content">
+                    <a href="/dashboard">Dashboard</a>
+                    <a href="/mylibrary">My Library</a>
+                </div>
+
+            </div>
+
+
+            <div class="navdropdown">
+
+                <button class="navdropbtn">
+                    Contribute ▼
+                </button>
+
+                <div class="navdropdown-content">
+                    <a href="/valley/new">Add a Book</a>
+                    <a href="/authors/new">Add an Author</a>
+                </div>
+
+            </div>
+
+
+            <a href="/auth/sign-out">Sign out</a>
+
+
+            <% } else { %>
+
+                <a href="/auth/sign-up">Sign up</a>
+                <a href="/auth/sign-in">Sign in</a>
+
+                <% } %>
+    </div>
 </nav>

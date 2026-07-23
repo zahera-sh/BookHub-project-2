@@ -7,6 +7,7 @@
     <title>BookHub | My Library</title>
     <link rel="icon" href="/images/main/BookHub-logo-mini.png" type="image/png">
     <link rel="stylesheet" href="/css/style-for-all.css">
+    <link rel="stylesheet" href="/css/mylibrary.css">
 </head>
 
 <body>
@@ -15,53 +16,109 @@
 
         <h1>My Library</h1>
 
-        <section id="booksInLibrary">
-        <% for(let addedBook of mylibrary){ %>
-            
-            <div class="bookinLibrary">
+        <section class="library-container">
 
-                <img src="/images/books/<%=addedBook.book.coverPhoto%>" alt="coverPhoto" style="width: 90px; height: 120px; object-fit: cover;">
-                <br><a href="/valley/<%= addedBook.book._id %>"><%= addedBook.book.title %></a>
+            <% for(let addedBook of mylibrary){ %>
 
-                <p>Reaading status: <%= addedBook.status %></p>
+                <div class="library-card">
 
-                <p>Date started: <%= addedBook.dateStarted
-                                    ? addedBook.dateStarted.toLocaleDateString("en-GB")
-                                    : "Not started" %></p>
-                
-                <p>Date finished: <%= addedBook.dateFinished
-                                    ? addedBook.dateFinished.toLocaleDateString("en-GB")
-                                    : "Not finished" %></p>
-                
-                <p>Notes: <%= addedBook.notes %></p>
+                    <img src="/images/books/<%=addedBook.book.coverPhoto%>" alt="coverPhoto">
 
-                <form action="/mylibrary/<%= addedBook._id %>/favorite" method="post">
-                    <button title="favorite" type="submit">
-                        <%= addedBook.isFavorited ? "🩷" : "🩶" %>
-                    </button>
-                </form>
 
-                <form action="/mylibrary/<%= addedBook._id %>/finish" method="post">
-                    <button title="finished reading?" type="submit">
-                        <%= addedBook.status === "Finished" ? "📘" : "📖" %>
-                    </button>
-                </form><br>
+                    <a class="title" href="/valley/<%= addedBook.book._id %>">
 
-                <form action="/mylibrary/<%= addedBook._id %>/edit" method="get">
-                <button title="update status">📝</button>
-                </form>
+                        <%= addedBook.book.title %>
 
-                <form action="/mylibrary/<%= addedBook._id %>?_method=DELETE" method="POST" onsubmit="return confirm('This action cannot be undone. Are you sure you want to remove this book from your library?')">
-                <button title="delete book from library" type="submit">❌</button>
-                </form>
+                    </a>
 
-                <hr>
 
-            </div>
+                    <p>
+                        <strong>Status:</strong>
+                        <%= addedBook.status %>
+                    </p>
 
-        <% } %>
+
+                    <p>
+                        <strong>Started:</strong>
+
+                        <%= addedBook.dateStarted ? addedBook.dateStarted.toLocaleDateString("en-GB") : "Not started" %>
+                    </p>
+
+
+
+                    <p>
+                        <strong>Finished:</strong>
+
+                        <%= addedBook.dateFinished ? addedBook.dateFinished.toLocaleDateString("en-GB") : "Not finished"
+                            %>
+                    </p>
+
+
+
+                    <p>
+                        <strong>Notes:</strong>
+
+                        <%= addedBook.notes || "No notes yet." %>
+                    </p>
+
+
+
+                    <div class="buttons-row">
+
+                        <form action="/mylibrary/<%= addedBook._id %>/favorite" method="POST">
+
+                            <button title="Favorite">
+
+                                <%= addedBook.isFavorited ? "🩷" : "🩶" %>
+
+                            </button>
+
+                        </form>
+
+
+
+                        <form action="/mylibrary/<%= addedBook._id %>/finish" method="POST">
+
+                            <button title="Finished Reading?">
+
+                                <%= addedBook.status==="Finished" ? "📘" : "📖" %>
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+
+
+                    <div class="buttons-row">
+
+                        <form action="/mylibrary/<%= addedBook._id %>/edit" method="GET">
+
+                            <button title="Update">
+                                📝
+                            </button>
+
+                        </form>
+
+
+
+                        <form action="/mylibrary/<%= addedBook._id %>?_method=DELETE" method="POST"
+                            onsubmit="return confirm('This action cannot be undone. Are you sure you want to remove this book from your library?')">
+
+                            <button title="Delete">
+                                ❌
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+                <% } %>
+
         </section>
-
 
 </body>
 

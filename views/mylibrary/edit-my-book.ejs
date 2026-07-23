@@ -7,69 +7,153 @@
     <title>BookHub | Update Library</title>
     <link rel="icon" href="/images/main/BookHub-logo-mini.png" type="image/png">
     <link rel="stylesheet" href="/css/style-for-all.css">
+    <link rel="stylesheet" href="/css/update-library.css">
 </head>
 
 <body>
 
     <%- include("../partials/navbar") %>
 
-        <aside class="toTheLeft">
-            <img src="/images/books/<%=myBookEdit.book.coverPhoto%>" alt="coverPhoto" style="width: 90px; height: 120px; object-fit: cover;">
+        <div class="edit-container">
 
-            <p><%= myBookEdit.book.title %></p>
+            <aside class="book-card">
 
-            <p>Authors:</p>
-            <% for (let author of myBookEdit.book.authors) { %>
-                <ul>
-                <li><%= author.authorName %></li>
-                </ul>
-            <% } %>
+                <img src="/images/books/<%=myBookEdit.book.coverPhoto%>" alt="coverPhoto">
 
-            <p>Publish Date:</p>
-            <p><%= myBookEdit.book.publishedDate? myBookEdit.book.publishedDate.toLocaleDateString("en-GB")
-                    : "Unknown" %></p>
 
-            <p>About:</p>
-            <p><%= myBookEdit.book.description %></p>
+                <h2>
+                    <%= myBookEdit.book.title %>
+                </h2>
 
-            <p>Genres:</p>
-            <% for (let genre of myBookEdit.book.genres) { %>
-                <ul>
-                <li><%= genre.genre %></li>
-                </ul>
-            <% } %>
 
-            <p>Page Count:</p>
-            <p><%= myBookEdit.book.pageCount %></p>
-            
-            <p>Likes: <%= myBookEdit.book.likes.length %></p>
-        </aside>
+                <h3>Authors</h3>
 
-        <section>
-            <p>Update <%= myBookEdit.book.title %></p>
+                <% for(let author of myBookEdit.book.authors){ %>
 
-            <form action="/mylibrary/<%= myBookEdit._id %>/edit?_method=PUT" method="POST">
+                    <p>
+                        <%= author.authorName %>
+                    </p>
 
-                <label for="status">Reading Status:</label>
-                <select name="status" id="status">
-                    <option value="Want to Read">Want to Read</option>
-                    <option value="Reading">Reading</option>
-                    <option value="Finished">Finished</option>
-                    <option value="Dropped">Dropped</option>
-                </select>
+                    <% } %>
 
-                <label for="dateStarted">Date Started:</label>
-                <input type="date" name="dateStarted" id="dateStarted">
 
-                <label for="dateFinished">Date Finished:</label>
-                <input type="date" name="dateFinished" id="dateFinished">
 
-                <label for="notes">Notes:</label>
-                <input type="text" name="notes" id="notes" maxlength="500"></input>
+                        <h3>Published</h3>
 
-                <button type="submit">Update</button>
-            </form>
-        </section>
+                        <p>
+                            <%= myBookEdit.book.publishedDate ?
+                                myBookEdit.book.publishedDate.toLocaleDateString("en-GB") : "Unknown" %>
+                        </p>
+
+
+
+                        <h3>Description</h3>
+
+                        <p>
+                            <%= myBookEdit.book.description %>
+                        </p>
+
+
+
+                        <h3>Genres</h3>
+
+                        <% for(let genre of myBookEdit.book.genres){ %>
+
+                            <p>
+                                <%= genre.genre %>
+                            </p>
+
+                            <% } %>
+
+
+
+                                <h3>Page Count</h3>
+
+                                <p>
+                                    <%= myBookEdit.book.pageCount %>
+                                </p>
+
+
+                                <h3>Likes</h3>
+
+                                <p>
+                                    <%= myBookEdit.book.likes.length %>
+                                </p>
+
+            </aside>
+
+
+
+
+            <section class="update-card">
+
+                <h2>
+                    Update your Reading Progress
+                </h2>
+
+
+                <form action="/mylibrary/<%= myBookEdit._id %>/edit?_method=PUT" method="POST">
+
+
+                    <label for="status">
+                        Reading Status
+                    </label>
+
+                    <select name="status" id="status">
+
+                        <option value="Want to Read">
+                            Want to Read
+                        </option>
+
+                        <option value="Reading">
+                            Reading
+                        </option>
+
+                        <option value="Finished">
+                            Finished
+                        </option>
+
+                        <option value="Dropped">
+                            Dropped
+                        </option>
+
+                    </select>
+
+
+
+                    <label for="dateStarted">
+                        Date Started
+                    </label>
+
+                    <input type="date" name="dateStarted" id="dateStarted">
+
+
+
+                    <label for="dateFinished">
+                        Date Finished
+                    </label>
+
+                    <input type="date" name="dateFinished" id="dateFinished">
+
+
+
+                    <label for="notes">
+                        Notes
+                    </label>
+
+                    <input type="text" name="notes" id="notes" maxlength="500">
+
+
+
+                    <button type="submit">
+                        Update
+                    </button>
+
+                </form>
+
+            </section>
+
+        </div>
 
 </body>
 

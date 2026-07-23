@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BookHub | Add a Book</title>
     <link rel="icon" href="/images/main/BookHub-logo-mini.png" type="image/png">
+    <link rel="stylesheet" href="/css/add-new-ab.css">
     <link rel="stylesheet" href="/css/style-for-all.css">
 </head>
 
@@ -17,41 +18,70 @@
 
         <form action="/valley" method="POST" enctype="multipart/form-data">
 
-            <label for="title">Title:</label>
-            <input type="text" name="title" id="title" required>
-<br>
-            <label for="authors">Authors:</label>
-            <select id="authors" name="authors" multiple>
-                <option value="" disabled selected>Choose Authors</option>
-                <% for (let author of authorsList) { %>
-                    <option value="<%= author._id %>">
-                        <%= author.authorName %>
-                    </option>
-                <% } %>
-            </select>
-<br>
-            <label for="publishedDate">Published Date:</label>
-            <input type="date" name="publishedDate" id="publishedDate" required>
-<br>    
-            <label for="description">Description</label>
-            <input type="text" name="description" id="description" required minlength="30" maxlength="500">
-<br>
-            <label for="genres">Genres</label>
-            <select id="genres" name="genres" multiple>
-                <option value="" disabled selected>Choose Genres</option>
-                <% for (let genre of genresList) { %>
-                    <option value="<%= genre._id %>">
-                        <%= genre.genre %>
-                    </option>
-                <% } %>
-            </select>
-<br>
-            <label for="pageCount">Page Count:</label>
-            <input type="Number" name="pageCount" id="pageCount" min="1" step="1">
-<br>
-            <label for="coverPhoto">Add Photo</label>
-            <input type="file" name="coverPhoto" id="coverPhoto">
-<br>
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" name="title" id="title" required>
+            </div>
+
+
+            <div class="form-group">
+                <label for="authors">Authors:</label>
+
+                <select id="authors" name="authors" multiple>
+                    <% for (let author of authorsList) { %>
+                        <option value="<%= author._id %>">
+                            <%= author.authorName %>
+                        </option>
+                        <% } %>
+                </select>
+
+                <p class="helper-text">
+                    Hold Ctrl (Windows) or Command (Mac) to select multiple authors.
+                </p>
+            </div>
+
+
+            <div class="form-group">
+                <label for="publishedDate">Published Date:</label>
+                <input type="date" name="publishedDate" id="publishedDate" required>
+            </div>
+
+
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" name="description" id="description" minlength="30" maxlength="500" required>
+            </div>
+
+
+            <div class="form-group">
+                <label for="genres">Genres:</label>
+
+                <select id="genres" name="genres" multiple>
+                    <% for (let genre of genresList) { %>
+                        <option value="<%= genre._id %>">
+                            <%= genre.genre %>
+                        </option>
+                        <% } %>
+                </select>
+
+                <p class="helper-text">
+                    Hold Ctrl (Windows) or Command (Mac) to select multiple genres.
+                </p>
+            </div>
+
+
+            <div class="form-group">
+                <label for="pageCount">Page Count:</label>
+                <input type="number" name="pageCount" id="pageCount" min="1" step="1">
+            </div>
+
+
+            <div class="form-group">
+                <label for="coverPhoto">Add Photo:</label>
+                <input type="file" name="coverPhoto" id="coverPhoto">
+            </div>
+
+
             <button type="submit">Add</button>
 
         </form>

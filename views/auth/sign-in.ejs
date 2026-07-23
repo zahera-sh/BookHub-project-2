@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BookHub | Login</title>
   <link rel="icon" href="/images/main/BookHub-logo-mini.png" type="image/png">
+  <link rel="stylesheet" href="/css/auth-pages.css">
   <link rel="stylesheet" href="/css/style-for-all.css">
 </head>
 
@@ -14,19 +15,19 @@
   <%- include("../partials/navbar") %>
 
     <h1>Sign in</h1>
+    <div class="form-container">
+      <form action="/auth/sign-in" method="POST">
 
-    <form action="/auth/sign-in" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" required />
 
-      <label for="username">Username:</label>
-      <input type="text" name="username" id="username" required/>
-      
-      <label for="password">Password:</label>
-      <input type="password" name="password" id="password" required/>
-      
-      <button type="submit">Login</button>
-    
-    </form>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required />
 
+        <button type="submit">Login</button>
+
+      </form>
+    </div>
 </body>
 
 </html>

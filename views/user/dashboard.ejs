@@ -7,60 +7,150 @@
     <title>BookHub | Dashboard</title>
     <link rel="icon" href="/images/main/BookHub-logo-mini.png" type="image/png">
     <link rel="stylesheet" href="/css/style-for-all.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
 </head>
 
 <body>
 
     <%- include("../partials/navbar") %>
 
-        <h1>Dashboard</h1>
+        <div class="dashboard-container">
 
-        <p>Welcome <%= user.username %></p>
+            <h1>Dashboard</h1>
 
-        <img src="<%=user.profilePhoto%>" alt="profile-photo" style="width: 100px; height: 100px;">
+            <img class="profile-photo" src="<%= user.profilePhoto %>" alt="profile-photo">
 
-            <a href="/mylibrary">My Library</a>
-                <p>Books in Library: <%= libraryCount.length %></p>
+            <h2>Welcome, <%= user.username %>!</h2>
 
-            <p>Following: <%= following.length %></p>
-            <% for(let onefollow of following){ %>
-                <ul class="followedAuthorsList">
-                    <li><a href="/authors/<%=onefollow._id%>"><%=onefollow.authorName%></a></li>
-                </ul>
-            <% } %>
-            
-            <p>Liked Books: <%= liked.length %></p>
-            <% for(let onelike of liked){ %>
-                <ul class="likedBooksList">
-                    <li><a href="/valley/<%=onelike._id%>"><%=onelike.title%></a></li>
-                </ul>
-            <% } %>
 
-            <p>Reviews: <%= reviewCount.length %></p>
+            <div class="stats-container">
 
-            <p>Contributions</p>
-                <p>Books Added: <%= booksAdded.length %></p>
-                <p>Authors Added: <%= authorsAdded.length %></p>
-                    <p>Total: <%= booksAdded.length + authorsAdded.length %></p>
-<hr>
-        <p>Danger Zone:</p>
+                <div class="stats-card">
+                    <h3>My Library</h3>
 
-            <form action="/dashboard/change-password" method="POST">
-                <label for="currentPassword">Current Password</label>
-                <input type="password" name="currentPassword" id="currentPassword" required>
+                    <p>Books: <%= libraryCount.length %>
+                    </p>
 
-                <label for="password">New Password</label>
-                <input type="password" name="password" id="password" minlength="8" required />
+                    <p>Reviews: <%= reviewCount.length %>
+                    </p>
 
-                <label for="confirmPassword">Confirm Password</label>
-                <input type="password" name="confirmPassword" id="confirmPassword" required />
+                    <a href="/mylibrary">Visit My Library</a>
+                </div>
 
-                <button type="submit">Confirm</button>
-            </form>
 
-        <form action="/dashboard/<%=user._id%>/confirm-delete" method="GET">
-            <button>Delete Account</button>
-        </form>
+                <div class="stats-card">
+                    <h3>Contributions</h3>
+
+                    <p>Books Added: <%= booksAdded.length %>
+                    </p>
+
+                    <p>Authors Added: <%= authorsAdded.length %>
+                    </p>
+
+                    <p>Total: <%= booksAdded.length + authorsAdded.length %>
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="lists-container">
+
+                <div class="list-card">
+
+                    <h3>Following</h3>
+
+                    <p>Total: <%= following.length %>
+                    </p>
+
+                    <% for(let onefollow of following){ %>
+
+                        <a href="/authors/<%=onefollow._id%>">
+                            <%= onefollow.authorName %>
+                        </a>
+
+                        <% } %>
+
+                </div>
+
+
+
+                <div class="list-card">
+
+                    <h3>Liked Books</h3>
+
+                    <p>Total: <%= liked.length %>
+                    </p>
+
+                    <% for(let onelike of liked){ %>
+
+                        <a href="/valley/<%=onelike._id%>">
+                            <%= onelike.title %>
+                        </a>
+
+                        <% } %>
+
+                </div>
+
+            </div>
+
+
+            <div class="password-card">
+
+                <h3>Change Password</h3>
+
+                <form action="/dashboard/change-password" method="POST">
+
+                    <label for="currentPassword">
+                        Current Password
+                    </label>
+
+                    <input type="password" name="currentPassword" id="currentPassword" required>
+
+
+                    <label for="password">
+                        New Password
+                    </label>
+
+                    <input type="password" name="password" id="password" minlength="8" required>
+
+
+                    <label for="confirmPassword">
+                        Confirm Password
+                    </label>
+
+                    <input type="password" name="confirmPassword" id="confirmPassword" required>
+
+
+                    <button type="submit">
+                        Confirm
+                    </button>
+
+                </form>
+
+            </div>
+
+
+
+            <div class="danger-zone">
+
+                <h3>Danger Zone</h3>
+
+                <p>
+                    Deleting your account is permanent.
+                </p>
+
+                <form action="/dashboard/<%=user._id%>/confirm-delete" method="GET">
+
+                    <button class="delete-btn">
+                        Delete Account
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
 
 </body>
 

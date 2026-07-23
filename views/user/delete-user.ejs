@@ -7,22 +7,38 @@
     <title>Delete Account</title>
     <link rel="icon" href="/images/main/BookHub-logo-mini.png" type="image/png">
     <link rel="stylesheet" href="/css/style-for-all.css">
+    <link rel="stylesheet" href="/css/deleteuser.css">
 </head>
 
 <body>
+    <div class="delete-container">
 
-    <%- include("../partials/navbar") %>
+        <h1>Farewell, Reader!</h1>
 
-        <p>We're sad to see you go, but we hope your next adventure is amazing! Our digital door is always unlocked for you.</p>
-        
-        
-        <p>Are you sure you want to delete your account?</p>
+        <p>
+            We're sad to see you go, but we hope your next
+            adventure is amazing! Our digital door is always
+            unlocked for you.
+        </p>
 
-        <form action="/dashboard/<%=user._id%>/delete?_method=PUT" method="POST">
-            <button>Delete</button>
+        <p>
+            Are you sure you want to delete your account?
+        </p>
+
+        <form action="/dashboard/<%=user._id%>/delete?_method=PUT"
+            method="POST">
+
+            <button type="submit">
+                Delete my Account
+            </button>
+
         </form>
 
-        <a href="/">...or Return to BookHub 📖✨</a>
+        <a href="/">
+            Return to BookHub 📖✨
+        </a>
+
+    </div>
 
 </body>
 

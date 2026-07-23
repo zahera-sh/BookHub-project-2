@@ -1,0 +1,138 @@
+body{
+    margin:0;
+    text-align:center;
+}
+
+
+.page-container{
+    width:90%;
+    margin:60px auto;
+}
+
+.author-layout{
+    display:flex;
+    gap:40px;
+    align-items:flex-start;
+}
+
+
+.author-card,
+.actions-card,
+.books-card{
+    padding:40px;
+    background-color:rgba(255,255,255,.45);
+    backdrop-filter:blur(10px);
+    border-radius:30px;
+    border:2px solid #D6CAE6;
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.15);
+}
+.author-card{
+    flex:2;
+}
+
+.actions-card{
+    flex:1;
+}
+
+
+.profile-photo{
+    width:250px;
+    height:320px;
+    object-fit:cover;
+    border-radius:25px;
+    box-shadow:
+    0 15px 30px rgba(0,0,0,.15);
+}h1{
+    font-size:64px;
+    color:#6B5A57;
+}
+
+
+h2{
+    font-size:40px;
+    color:#6B5A57;
+}
+
+
+h3{
+    color:#A991B8;
+    font-size:28px;
+}
+
+
+p{
+    color:#6B5A57;
+    font-size:22px;
+    line-height:35px;
+}
+
+
+.books-card{
+    width:80%;
+    margin:60px auto;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+
+.book-link{
+    text-decoration:none;
+    color:#6B5A57;
+    font-size:24px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+
+.book-link:hover{
+    color:#A991B8;
+}
+
+
+form{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+
+button{
+    padding:18px;
+    font-size:22px;
+    font-weight:bold;
+    color:#6B5A57;
+    background-color:#F3D7DD;
+    border:2px solid #A991B8;
+    border-radius:50px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+
+button:hover{
+    background-color:#CFE4D3;
+    transform:translateY(-3px);
+}
+
+
+.danger-zone{
+    width:700px;
+    margin:60px auto;
+    padding:40px;
+    border-radius:30px;
+    background-color:#FFF1F1;
+}
+
+
+.delete-btn{
+    background-color:#D88C8C;
+    color:white;
+    border:none;
+}
+
+
+.delete-btn:hover{
+    background-color:#C86F6F;
+}

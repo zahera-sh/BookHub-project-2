@@ -1,3 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Bitcount+Single:wght@100..900&family=Bonbon&family=Geomini:wght@200..800&family=Honk:MORF@15&family=Londrina+Shadow&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&family=Special+Elite&display=swap');
+
 body {
+    margin: 0;
     background-color: #FFF6D5;
+    font-family: "Geomini", sans-serif;
+}
+
+
+nav {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #B9CFBC;
+}
+
+
+.main-conL img {
+    width: 60px;
+    height: auto;
+    padding-left: 15px;
+    padding-bottom: 10px;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,.15));
+}
+
+
+.main-conR {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding-right: 15px;
+}
+
+
+nav a {
+    text-decoration: none;
+    color: #6B5A57;
+    font-weight: 600;
+    padding: 8px 10px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    font-size: 15px;
+}
+
+
+nav a:hover {
+    background-color: #F3D7DD;
+    color: #6B5A57;
+    transform: translateY(-2px);
+}
+
+
+.navdropdown {
+    position: relative;
+}
+
+
+.navdropbtn {
+    border: none;
+    cursor: pointer;
+    background: none;
+    color: #6B5A57;
+    font-family: "Geomini", sans-serif;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+
+.navdropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 180px;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #FFF6D5;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .1);
+}
+
+
+.navdropdown-content a {
+    display: block;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+.navdropdown-content a:hover {
+    background-color: #F3D7DD;
+}
+
+
+.navdropdown:hover .navdropdown-content {
+    display: block;
 }

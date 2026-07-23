@@ -2,54 +2,61 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BookHub | Registration</title>
   <link rel="icon" href="/images/main/BookHub-logo-mini.png" type="image/png">
   <link rel="stylesheet" href="/css/style-for-all.css">
+  <link rel="stylesheet" href="/css/auth-pages.css">
 </head>
 
 <body>
 
   <%- include("../partials/navbar") %>
 
-    <h1>Create New Account</h1>
+    <div class="form-container">
 
-    <form action="/auth/sign-up" method="POST">
-      <label for="username">Username</label>
-      <input type="text" name="username" id="username" minlength="3" maxlength="12" pattern="[A-Za-z0-9]{3,12}" required/>
+      <h1>Create New Account</h1>
 
-      <div class="alert-banner">
-        <span>🛈 Username must be alphanumeric and 3-12 characters long.</span>
-      </div>
+      <form action="/auth/sign-up" method="POST">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" minlength="3" maxlength="12" pattern="[A-Za-z0-9]{3,12}"
+          required />
 
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password" minlength="8" required/>
+        <div class="alert-banner">
+          <span>🛈 Username must be alphanumeric and 3-12 characters long.</span>
+        </div>
 
-      <div class="alert-banner">
-        <span>🛈 Passwords must be at least 8 characters.</span>
-      </div>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" minlength="8" required />
 
-      <label for="confirmPassword">Confirm Password</label>
-      <input type="password" name="confirmPassword" id="confirmPassword" required/>
+        <div class="alert-banner">
+          <span>🛈 Passwords must be at least 8 characters.</span>
+        </div>
 
-      <br>
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" name="confirmPassword" id="confirmPassword" required />
 
-      <label for="gender">Gender</label>
+        <br>
 
-      <input type="radio" name="gender" id="female" value="F" required>
-      <label for="female"><img src="/images/main/profile-photo-female.png" alt="female" style="width: 100px; height: 100px;"></label>
-      
-      <input type="radio" name="gender" id="male" value="M">
-      <label for="male"><img src="/images/main/profile-photo-male.png" alt="Male" style="width: 100px; height: 100px;"></label>
+        <label for="gender">Gender</label>
+        
+        <div class="gender-selection">
+          <input type="radio" name="gender" id="female" value="F" required>
+          <label for="female"><img src="/images/main/profile-photo-female.png" alt="female"></label>
 
-      <button type="submit">Create</button>
+          <input type="radio" name="gender" id="male" value="M">
+          <label for="male"><img src="/images/main/profile-photo-male.png" alt="Male"></label>
+        </div>
 
-      <p>By creating an account, you agree to the BookHub <a href="">Terms of Service</a> and <a href="">Privacy Policy</a></p>
+        <button type="submit">Create</button>
 
-      <p>Already have an account? <a href="/auth/sign-in">Sign in</a></p>
-    </form>
+        <p>By creating an account, you agree to the BookHub <a href="">Terms of Service</a> and <a href="">Privacy
+            Policy</a></p>
 
+        <p>Already have an account? <a href="/auth/sign-in">Sign in</a></p>
+      </form>
+    </div>
 </body>
 
 </html>

@@ -7,6 +7,7 @@
     <title>BookHub | Add Author</title>
     <link rel="icon" href="/images/main/BookHub-logo-mini.png" type="image/png">
     <link rel="stylesheet" href="/css/style-for-all.css">
+    <link rel="stylesheet" href="/css/add-new-ab.css">
 </head>
 
 <body>
@@ -17,24 +18,36 @@
 
         <form action="/authors" method="POST" enctype="multipart/form-data">
 
-            <label for="authorName">Author Name:</label>
-            <input type="text" name="authorName" id="authorName" minlength="3" required>
-<br>
-            <label for="fullName">Full Name:</label>
-            <input type="text" name="fullName" id="fullName">
-<br>
-            <label for="profilePhoto">Add Photo</label>
-            <input type="file" name="profilePhoto" id="profilePhoto">
-<br>
-            <label for="birthDate">Birth Date:</label>
-            <input type="date" name="birthDate" id="birthDate">
-<br>
-            <label for="deathDate">Death Date:</label>
-            <input type="date" name="deathDate" id="deathDate">
-<br>
-            <label for="nationality">Nationality:</label>
-            <input type="text" name="nationality" id="nationality">
-<br>
+            <div class="form-group">
+                <label for="authorName">Author Name:</label>
+                <input type="text" name="authorName" id="authorName" minlength="3" required>
+            </div>
+
+            <div class="form-group">
+                <label for="fullName">Full Name:</label>
+                <input type="text" name="fullName" id="fullName">
+            </div>
+
+            <div class="form-group">
+                <label for="profilePhoto">Add Photo:</label>
+                <input type="file" name="profilePhoto" id="profilePhoto">
+            </div>
+
+            <div class="form-group">
+                <label for="birthDate">Birth Date:</label>
+                <input type="date" name="birthDate" id="birthDate">
+            </div>
+
+            <div class="form-group">
+                <label for="deathDate">Death Date:</label>
+                <input type="date" name="deathDate" id="deathDate">
+            </div>
+
+            <div class="form-group">
+                <label for="nationality">Nationality:</label>
+                <input type="text" name="nationality" id="nationality">
+            </div>
+
             <button type="submit">Add</button>
 
         </form>

@@ -1,0 +1,67 @@
+.main-div {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image:
+        linear-gradient(
+        rgba(255,246,213,.25),
+        rgba(255,246,213,.35)),
+        url("/images/main/homepage.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.overlay {
+    align-items: center;
+    width: 500px;
+    padding: 50px;
+    text-align: center;
+    background-color: rgba(255,255,255,.45);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    border: 2px solid #D6CAE6;
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.15);
+}
+
+
+.overlay h1 {
+    font-size: 4rem;
+    color: #6B5A57;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+
+
+.overlay p {
+    font-size: 1.3rem;
+    color: #6B5A57;
+    margin-bottom: 35px;
+    line-height: 1.7;
+}
+
+
+
+.enterbtn {
+    text-decoration: none;
+    background-color: #F3D7DD;
+    color: #6B5A57;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: .3s ease;
+    border: 2px solid #A991B8;
+}
+
+
+.enterbtn:hover {
+    background-color: #CFE4D3;
+    transform: translateY(-3px);
+    box-shadow:
+    0 8px 20px rgba(0,0,0,.15);
+}

@@ -4,152 +4,337 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BookHub | <%= book.title %></title>
+    <title>BookHub | <%= book.title %>
+    </title>
     <link rel="icon" href="/images/main/BookHub-logo-mini.png" type="image/png">
     <link rel="stylesheet" href="/css/style-for-all.css">
+    <link rel="stylesheet" href="/css/book-details.css">
 </head>
 
 <body>
 
     <%- include("../partials/navbar") %>
 
-        <h1><%= book.title %></h1>
+        <div class="page-container">
 
-        <img src="/images/books/<%=book.coverPhoto%>" alt="coverPhoto" style="width: 90px; height: 120px; object-fit: cover;">
-        
-        <p>Authors:</p>
-            <% for (let author of book.authors) { %>
-                <ul><li><%= author.authorName %></li></ul>
-            <% } %>
-
-        <p>Published: <%= book.publishedDate? book.publishedDate.toLocaleDateString("en-GB")
-        : "Unknown" %></p>
-        
-        <p>Description: <%= book.description %></p>
-        
-        <p>Genres:</p>
-            <% for (let genre of book.genres) { %>
-                <ul><li><%= genre.genre %></li></ul>
-            <% } %>
-        
-        <p>Page Count: <%= book.pageCount %></p>
-        
-        <p>Likes: <%= book.likes.length %></p>
+            <h1>
+                <%= book.title %>
+            </h1>
 
 
-        <% if(user && book.likes.some((oneId) => oneId.equals(user._id))) { %>
-            <form action="/valley/<%= book._id %>/dislike" method="POST">
-            <button title="dislike">🩷</button>
-            </form>
-        <% } else { %>
-            <form action="/valley/<%= book._id %>/like" method="POST">
-            <button title="like">🩶</button>
-            </form>
-        <% } %>
+            <div class="book-layout">
 
-        <form action="/mylibrary/<%= book._id %>" method="POST">
-        <button title="add to library" type="submit">➕</button>
-        </form>
+                <aside class="book-card">
 
-<hr>
+                    <img class="cover-photo" src="/images/books/<%=book.coverPhoto%>" alt="coverPhoto">
 
-        <h2>Reviews</h2>
+                    <h3>Authors</h3>
 
-        <% if(user && !userReview){ %>
-        <form action="/reviews/<%= book._id %>" method="POST">
-
-            <label for="rating">Rating</label>
-            <select name="rating" id="rating" required>
-                <option value="" selected disabled>Rate the Book</option>
-                <option value="1">⭐</option>
-                <option value="2">⭐⭐</option>
-                <option value="3">⭐⭐⭐</option>
-                <option value="4">⭐⭐⭐⭐</option>
-                <option value="5">⭐⭐⭐⭐⭐</option>
-            </select>
-
-            <label for="spoilers">Spoilers</label>
-            <input name="spoilers" id="spoilers" type="checkbox">
-
-            <label for="reviewTitle">Title</label>
-            <input name="reviewTitle" id="reviewTitle" type="text" rows="8" maxlength="100" required>
-
-            <label for="reviewBody">Review</label>
-            <textarea name="reviewBody" id="reviewBody" minlength="10" maxlength="500" required></textarea>
-
-            <button title="leave a review" type="submit">✍🏻</button>
-
-        </form>
-        <% } %>
-
-        
-        <% if(userReview && !editMode){ %>
-        <p><%= userReview.user.username %>'s Review</p>
-
-            <p><%= "⭐".repeat(userReview.rating) %> <%= userReview.rating %>/5</p>
-            <% if(userReview.spoilers){ %><p>⚠️ Spoilers</p><% } %>
-
-            <p><%= userReview.reviewTitle %></p>
-            <p><%= userReview.reviewBody %></p>
-
-            <a href="/valley/<%= book._id %>?edit=true" title="modify">📝</a>
-
-            <form action="/reviews/<%= userReview._id %>?_method=DELETE" method="POST" onsubmit="return confirm('This action cannot be undone. Are you sure you want to remove your review?')">
-                <button title="delete review" type="submit">❌</button>
-            </form>
-        <% } %>
+                    <% for (let author of book.authors) { %>
+                        <p>
+                            <%= author.authorName %>
+                        </p>
+                        <% } %>
 
 
-        <% if(userReview && editMode){ %>
-        <form action="/reviews/<%= userReview._id %>?_method=PUT" method="POST">
+                            <h3>Published</h3>
 
-            <label for="rating">Rating</label>
-            <select name="rating" id="rating" required>
-                <option value="1" <%= userReview.rating ===1 ? "selected":"" %>>⭐</option>
-                <option value="1" <%= userReview.rating ===2 ? "selected":"" %>>⭐⭐</option>
-                <option value="1" <%= userReview.rating ===3 ? "selected":"" %>>⭐⭐⭐</option>
-                <option value="1" <%= userReview.rating ===4 ? "selected":"" %>>⭐⭐⭐⭐</option>
-                <option value="1" <%= userReview.rating ===5 ? "selected":"" %>>⭐⭐⭐⭐⭐</option>
-            </select>
-
-            <label for="spoilers">Spoilers</label>
-            <input name="spoilers" id="spoilers" type="checkbox" <%= userReview.spoilers ? "checked" : "" %>>
-
-            <label for="reviewTitle">Title</label>
-            <input name="reviewTitle" id="reviewTitle" type="text" value="<%= userReview.reviewTitle %>" rows="8" maxlength="100" required>
-
-            <label for="reviewBody">Review</label>
-            <textarea name="reviewBody" id="reviewBody" minlength="10" maxlength="500" required><%= userReview.reviewBody %></textarea>
-
-            <button title="leave a review" type="submit">✍🏻</button>
-        
-        </form>
-
-            <a href="/valley/<%= book._id %>" title="cancel">❌</a>
-        <% } %>
-
-<hr>
-
-        <% for(let review of reviews){ %>
-            <% if(!user || !review.user._id.equals(user._id)){ %>
-
-                <p><%= "⭐".repeat(review.rating) %><%= review.rating %>/5</p>
-                <p><%= review.user.username %> says:</p>
-                
-                <% if(review.spoilers){ %><p>⚠️ Spoilers</p><% } %>
-                
-                <p>Title: <%= review.reviewTitle %></p>
-                <p>Review: <%= review.reviewBody %></p>
-
-            <% } %>
-        <% } %>
+                            <p>
+                                <%= book.publishedDate ? book.publishedDate.toLocaleDateString("en-GB") : "Unknown" %>
+                            </p>
 
 
-        <% if(user && user.isAdmin){ %>
-            <form action="/valley/<%= book._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this author?')">
-                <button>Delete Book</button>
-            </form>
-        <% } %>
+                            <h3>Description</h3>
+
+                            <p>
+                                <%= book.description %>
+                            </p>
+
+
+                            <h3>Genres</h3>
+
+                            <% for (let genre of book.genres) { %>
+                                <p>
+                                    <%= genre.genre %>
+                                </p>
+                                <% } %>
+
+
+                                    <h3>Page Count</h3>
+
+                                    <p>
+                                        <%= book.pageCount %>
+                                    </p>
+
+
+                                    <h3>Likes</h3>
+
+                                    <p>
+                                        <%= book.likes.length %>
+                                    </p>
+
+                </aside>
+
+
+
+
+                <section class="actions-card">
+
+                    <h2>Reader Actions</h2>
+
+
+                    <% if(user && book.likes.some((oneId)=> oneId.equals(user._id))) { %>
+
+                        <form action="/valley/<%= book._id %>/dislike" method="POST">
+
+                            <button type="submit">
+                                🩷 Unlike Book
+                            </button>
+
+                        </form>
+
+                        <% } else { %>
+
+                            <form action="/valley/<%= book._id %>/like" method="POST">
+
+                                <button type="submit">
+                                    🩶 Like Book
+                                </button>
+
+                            </form>
+
+                            <% } %>
+
+
+                                <form action="/mylibrary/<%= book._id %>" method="POST">
+
+                                    <button type="submit">
+                                        ➕ Add to Library
+                                    </button>
+
+                                </form>
+
+
+                </section>
+
+            </div>
+
+
+            <div class="reviews-card">
+
+                <h2>Reviews</h2>
+
+                <% if(user && !userReview){ %>
+
+                    <form action="/reviews/<%= book._id %>" method="POST">
+
+                        <label for="rating">Rating</label>
+
+                        <select name="rating" id="rating" required>
+                            <option value="" selected disabled>
+                                Rate the Book
+                            </option>
+
+                            <option value="1">⭐</option>
+                            <option value="2">⭐⭐</option>
+                            <option value="3">⭐⭐⭐</option>
+                            <option value="4">⭐⭐⭐⭐</option>
+                            <option value="5">⭐⭐⭐⭐⭐</option>
+                        </select>
+
+
+                        <label for="spoilers">Spoilers</label>
+                        <input name="spoilers" id="spoilers" type="checkbox">
+
+
+                        <label for="reviewTitle">Title</label>
+
+                        <input name="reviewTitle" id="reviewTitle" type="text" maxlength="100" required>
+
+
+                        <label for="reviewBody">Review</label>
+
+                        <textarea name="reviewBody" id="reviewBody" minlength="10" maxlength="500" required></textarea>
+
+
+                        <button type="submit">
+                            ✍🏻 Leave Review
+                        </button>
+
+                    </form>
+
+                    <% } %>
+
+
+
+                        <% if(userReview && !editMode){ %>
+
+                            <h3>
+                                <%= user.username %>'s Review
+                            </h3>
+
+                            <p>
+                                <%= "⭐" .repeat(userReview.rating) %>
+                                    <%= userReview.rating %>/5
+                            </p>
+
+                            <% if(userReview.spoilers){ %>
+                                <p>⚠️ Spoilers</p>
+                                <% } %>
+
+                                    <p>
+                                        <%= userReview.reviewTitle %>
+                                    </p>
+
+                                    <p>
+                                        <%= userReview.reviewBody %>
+                                    </p>
+
+
+                                    <a class="edit-btn" href="/valley/<%= book._id %>?edit=true">
+
+                                        📝 Edit Review
+
+                                    </a>
+
+
+                                    <form action="/reviews/<%= userReview._id %>?_method=DELETE" method="POST"
+                                        onsubmit="return confirm('This action cannot be undone. Are you sure you want to remove your review?')">
+
+                                        <button type="submit">
+                                            ❌ Delete Review
+                                        </button>
+
+                                    </form>
+
+                                    <% } %>
+
+
+
+
+                                        <% if(userReview && editMode){ %>
+
+                                            <form action="/reviews/<%= userReview._id %>?_method=PUT" method="POST">
+
+                                                <label for="rating">Rating</label>
+
+                                                <select name="rating" id="rating" required>
+
+                                                    <option value="1" <%=userReview.rating===1 ? "selected" :"" %>>⭐
+                                                    </option>
+
+                                                    <option value="1" <%=userReview.rating===2 ? "selected" :"" %>>⭐⭐
+                                                    </option>
+
+                                                    <option value="1" <%=userReview.rating===3 ? "selected" :"" %>>⭐⭐⭐
+                                                    </option>
+
+                                                    <option value="1" <%=userReview.rating===4 ? "selected" :"" %>>⭐⭐⭐⭐
+                                                    </option>
+
+                                                    <option value="1" <%=userReview.rating===5 ? "selected" :"" %>>⭐⭐⭐⭐⭐
+                                                    </option>
+
+                                                </select>
+
+
+                                                <label for="spoilers">Spoilers</label>
+
+                                                <input name="spoilers" id="spoilers" type="checkbox"
+                                                    <%=userReview.spoilers ? "checked" :"" %>>
+
+
+                                                <label for="reviewTitle">Title</label>
+
+                                                <input type="text" name="reviewTitle"
+                                                    value="<%= userReview.reviewTitle %>" maxlength="100" required>
+
+
+                                                <label for="reviewBody">Review</label>
+
+                                                <textarea name="reviewBody" minlength="10" maxlength="500"
+                                                    required><%= userReview.reviewBody %></textarea>
+
+
+                                                <button type="submit">
+                                                    Update Review
+                                                </button>
+
+                                            </form>
+
+
+                                            <a class="edit-btn" href="/valley/<%= book._id %>">
+
+                                                Cancel
+
+                                            </a>
+
+                                            <% } %>
+
+            </div>
+
+
+            <div class="community-reviews">
+
+                <% for(let review of reviews){ %>
+
+                    <% if(!user || !review.user._id.equals(user._id)){ %>
+
+                        <div class="review-box">
+
+                            <p>
+                                <%= "⭐" .repeat(review.rating) %>
+                                    <%= review.rating %>/5
+                            </p>
+
+                            <p>
+                                <strong>
+                                    <%= review.user.username %>
+                                </strong>
+                                says:
+                            </p>
+
+                            <% if(review.spoilers){ %>
+                                <p>⚠️ Spoilers</p>
+                                <% } %>
+
+                                    <p>
+                                        <%= review.reviewTitle %>
+                                    </p>
+
+                                    <p>
+                                        <%= review.reviewBody %>
+                                    </p>
+
+                        </div>
+
+                        <% } %>
+
+                            <% } %>
+
+            </div>
+
+
+            <% if(user && user.isAdmin){ %>
+
+                <div class="danger-zone">
+
+                    <h2>Admin Controls</h2>
+
+                    <form action="/valley/<%= book._id %>?_method=DELETE" method="POST"
+                        onsubmit="return confirm('Are you sure you want to delete this author?')">
+
+                        <button class="delete-btn">
+                            Delete Book
+                        </button>
+
+                    </form>
+
+                </div>
+
+                <% } %>
+
+        </div>
 
 </body>
 

@@ -1,0 +1,102 @@
+h1{
+    text-align:center;
+    color:#6B5A57;
+    font-size:64px;
+    margin-top:50px;
+}
+
+
+.library-container{
+    width:90%;
+    margin:50px auto;
+    display:flex;
+    justify-content:center;
+    gap:40px;
+    flex-wrap:wrap;
+}
+
+
+.library-card{
+    width:320px;
+    padding:35px;
+    text-align:center;
+    background-color:rgba(255,255,255,.45);
+    backdrop-filter:blur(10px);
+    border-radius:30px;
+    border:2px solid #D6CAE6;
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.15);
+    transition:.3s;
+}
+
+
+.library-card:hover{
+    transform:translateY(-8px);
+
+}
+
+
+.library-card img{
+    width:180px;
+    height:250px;
+    object-fit:cover;
+    border-radius:20px;
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.15);
+}
+
+
+.title{
+    display:block;
+    margin:25px 0;
+    text-decoration:none;
+    color:#6B5A57;
+    font-size:28px;
+    font-weight:bold;
+}
+
+
+.title:hover{
+    color:#A991B8;
+}
+
+
+.library-card p{
+    color:#6B5A57;
+    font-size:20px;
+    line-height:32px;
+}
+
+
+.buttons-row{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    margin-top:20px;
+}
+
+
+.buttons-row form{
+    margin:0;
+}
+
+
+.buttons-row button{
+    width:65px;
+    height:65px;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:28px;
+    background-color:#F3D7DD;
+    transition:.3s;
+
+}
+
+
+.buttons-row button:hover{
+    background-color:#CFE4D3;
+    transform:translateY(-3px);
+    box-shadow:
+    0 8px 20px rgba(0,0,0,.15);
+}
